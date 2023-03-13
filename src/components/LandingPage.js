@@ -1,13 +1,33 @@
 import React, { useState } from 'react';
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import logo from '../assets/images/logo.png';
 import SignUpForm from './SignUpForm.js'
-import { Modal, ModalBody, ModalHeader, Form, Row, Col } from 'reactstrap';
+import LoginForm from './LoginForm.js'
+import Home from './Home.js';
+
+
+class NavBar extends React.Component {
+  render() {
+    return (
+
+      <nav>
+        <h1 className="h1">Hello</h1>
+        <ul>
+          <Router>
+            <li><Route path='/home' component={Home} /></li>
+          </Router>
+        </ul>
+      </nav>
+    )
+  }
+}
 
 function LandingPage() {
-  const [modal, showSignUp] = useState(false);
+  const [signUp, showSignUp] = useState(false);
+  const [login, showLogin] = useState(false);
 
   return (
-
     <div>
       {/* Header */}
       <header>
@@ -20,49 +40,47 @@ function LandingPage() {
       <div>
         <Modal
           size='md'
-          isOpen={modal}
-          toggle={() => showSignUp(!modal)}
+          isOpen={signUp}
+          toggle={() => showSignUp(!signUp)}
         >
 
           <ModalHeader>
             Sign Up
           </ModalHeader>
           <ModalBody>
-            <Form>
-              <Row>
-                <Col>
-                  <div>
-                    <label htmlFor='name'>Name</label>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Enter Name'
-                    >
-                    </input>
-                  </div>
-                </Col>
-              </Row>
-            </Form>
+            <SignUpForm/>
           </ModalBody>
-          
         </Modal>
       </div>
 
+      {/* Login Form */}
+      <div>
+        <Modal
+          size='md'
+          isOpen={login}
+          toggle={() => showLogin(!login)}
+        >
 
-      <div><SignUpForm showPage={false}/></div>
+          <ModalHeader>
+            Login
+          </ModalHeader>
+          <ModalBody>
+            <LoginForm/>
+          </ModalBody>
+        </Modal>
+      </div>
+
       {/* Navigation menu */}
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
+          <li><a href="/home">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Services</a></li>
           <li><a href="#">Contact</a></li>
         </ul>
         <ul>
-          {/* <button className='btn btn-warning' onClick={() => <div><SignUpForm showPage={true}/></div>}>Sign Up</button> */}
           <li><button className='btn btn-warning' onClick={() => showSignUp(true)}>Sign Up</button></li>
-          <li><button className='btn btn-warning' onClick={() => showSignUp(true)}>Login</button></li>
-          {/* <button className='buttonStyle' onClick={<div><SignUpForm showPage={true}/></div>}>Sign Up</button> */}
+          <li><button className='btn btn-warning' onClick={() => showLogin(true)}>Login</button></li>
         </ul>
       </nav>
 

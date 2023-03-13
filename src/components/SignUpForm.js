@@ -1,44 +1,40 @@
-import React, { useState } from 'react';
-import { Modal, ModalBody, ModalHeader, Form, Row, Col } from 'reactstrap';
+import React from 'react';
+import { Form, Row, Col } from 'reactstrap';
 
-function SignUpForm({showPage}) {
-    const [modal, setModal] = useState(() => false);
-    if(showPage==true) setModal(true);
-    // const showPage = () => setModal(true);
-
+function SignUpForm() {
     return (
         <div>
-            <Modal
-                size='md'
-                isOpen={modal}
-                toggle={() => setModal(!modal)}
-            >
+            <Form>
+                <Row>
+                    <Col>
+                        <div>
+                            <label htmlFor='name'>Name</label>
+                            <input
+                                type='text'
+                                className='form-control'
+                                placeholder='Enter Name'
+                            >
+                            </input>
+                        </div>
+                    </Col>
+                </Row>
 
-                <ModalHeader>
-                    Sign Up
-                </ModalHeader>
-                <ModalBody>
-                    <Form>
-                        <Row>
-                            <Col>
-                                <div>
-                                    <label htmlFor='name'>Name</label>
-                                    <input
-                                        type='text'
-                                        className='form-control'
-                                        placeholder='Enter Name'
-                                    >
-                                    </input>
-                                </div>
-                            </Col>
-                        </Row>
-
-                    </Form>
-
-                </ModalBody>
-            </Modal>
+                <Row>
+                    <Col>
+                        <div>
+                            <label htmlFor='age'>Age</label>
+                            <input
+                                type='text' //CHECKKKKKKKKKKKK
+                                className='form-control'
+                                placeholder='Enter Age'
+                            >
+                            </input>
+                        </div>
+                    </Col>
+                </Row>
+            </Form>
         </div>
-    )
+    );
 }
 
 export default SignUpForm;
