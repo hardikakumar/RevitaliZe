@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import logo from '../assets/images/logo.png';
+import dietPlanImg from '../assets/images/dietPlan.jpg';
+import nutritionist from '../assets/images/nutritionist.jpg';
+import reminders from '../assets/images/reminder.png';
+import vatta from '../assets/images/dosha.png';
 import SignUpForm from './SignUpForm.js'
 import LoginForm from './LoginForm.js'
-import Home from './Home.js';
-
-
-class NavBar extends React.Component {
-  render() {
-    return (
-
-      <nav>
-        <h1 className="h1">Hello</h1>
-        <ul>
-          <Router>
-            <li><Route path='/home' component={Home} /></li>
-          </Router>
-        </ul>
-      </nav>
-    )
-  }
-}
 
 function LandingPage() {
   const [signUp, showSignUp] = useState(false);
@@ -48,7 +34,7 @@ function LandingPage() {
             Sign Up
           </ModalHeader>
           <ModalBody>
-            <SignUpForm/>
+            <SignUpForm />
           </ModalBody>
         </Modal>
       </div>
@@ -65,7 +51,7 @@ function LandingPage() {
             Login
           </ModalHeader>
           <ModalBody>
-            <LoginForm/>
+            <LoginForm />
           </ModalBody>
         </Modal>
       </div>
@@ -86,8 +72,8 @@ function LandingPage() {
 
       {/* Hero section */}
       <section className="hero">
-        <h2>Eat healthy, stay healthy</h2>
-        <p>Get personalized diet plans and achieve your fitness goals</p>
+        {/* <h2>Eat healthy, stay healthy</h2>
+        <p>Get personalized diet plans and achieve your fitness goals</p> */}
       </section>
 
       {/* Features section */}
@@ -95,17 +81,17 @@ function LandingPage() {
         <h3>Our Features</h3>
         <ul>
           <li>
-            <img src="path/to/feature1.png" alt="Feature 1" />
+            <img style={{ height: 200 }} src={dietPlanImg} alt="Personalized Diet Plans" />
             <h4>Personalized Diet Plans</h4>
             <p>We provide personalized diet plans based on your fitness goals and dietary requirements.</p>
           </li>
           <li>
-            <img src="path/to/feature2.png" alt="Feature 2" />
-            <h4>Meal Tracking</h4>
-            <p>Track your daily meals and get insights into your diet and nutrition.</p>
+            <img style={{ height: 200 }} src={reminders} alt="Meal Tracking & Reminders" />
+            <h4>Meal Tracking & Reminders</h4>
+            <p>Track your daily meals and set reminders for your diet.</p>
           </li>
           <li>
-            <img src="path/to/feature3.png" alt="Feature 3" />
+            <img style={{ height: 200 }} src={nutritionist} classname='photo' alt="Expert Support" />
             <h4>Expert Support</h4>
             <p>Get expert support and guidance from our certified nutritionists and fitness trainers.</p>
           </li>
