@@ -17,37 +17,35 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/users', async (req, res) => {
-    const {name,age,gender,email, password} = req.body
-    let userId = name.substring(0,3)
+    const { name, age, gender, email, password } = req.body
+    let userId = name.substring(0, 3)
     userId = userId.trim()
-    for (let i = 0; i < name.length; i++) 
-    {
-         if(name.charAt(i) == ' ')
-         {
-            userId = userId + name.charAt(i+1);
+    for (let i = 0; i < name.length; i++) {
+        if (name.charAt(i) == ' ') {
+            userId = userId + name.charAt(i + 1);
             break;
-         }
+        }
     }
-    userId = userId+age;
+    userId = userId + age;
 
     // PASSWORD ENCRYPTION
     const key = "02090711"
     const encryptedPasscode = CryptoJS.AES.encrypt(password, key);
 
-    const user = new UserModel({name,age,gender,email, encryptedPasscode,userId});
+    const user = new UserModel({ name, age, gender, email, encryptedPasscode, userId });
     user.save();
-    console.log('User object:', user);  
+    console.log('User object:', user);
     res.send(user);
 
 });
 
-app.get('/users', async (req,res) => {
+app.get('/users', async (req, res) => {
     const users = await UserModel.find();
     res.send(users);
 });
 
-app.listen(5000,() => console.log("Backend is running"));
+app.listen(5000, () => console.log("Backend is running"));
 

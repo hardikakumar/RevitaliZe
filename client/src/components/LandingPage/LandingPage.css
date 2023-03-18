@@ -29,7 +29,7 @@ img {
 /* Navigation menu styles */
 nav {
   background-color: #588970;
-  background-image: url('../assets/images/darkGreen.jpg');
+  background-image: url('../../assets/images/darkGreen.jpg');
   /* background-color: #C7F6B6; */
   color: #fff;
   display: flex;
@@ -83,7 +83,7 @@ nav a:hover {
 
 /* Hero section styles */
 .hero {
-  background-image: url('../assets/images/firstImg.jpg');
+  background-image: url('../../assets/images/firstImg.jpg');
   /* background-color: #FFFEE9; */
   background-size: cover;
   background-position: center;
@@ -107,7 +107,7 @@ nav a:hover {
 
 /* Features section styles */
 .features {
-  padding: 50px;
+  padding: 70px;
 }
 
 .features h3 {
@@ -175,7 +175,7 @@ nav a:hover {
 /* Footer styles */
 footer {
   background-color: #333;
-  background-image: url('../assets/images/darkGreen.jpg');
+  background-image: url('../../assets/images/darkGreen.jpg');
   color: #fff;
   text-align: center;
   padding: 20px;

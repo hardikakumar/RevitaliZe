@@ -1,6 +1,6 @@
 import React from 'react';
 import photo from './images/photo.png';
-import 'Questionnaire.css';
+import './Questionnaire.css';
 
 const Questionnaire = () => {
   return (
@@ -11,4 +11,3 @@ const Questionnaire = () => {
 }
 
 export default Questionnaire
-

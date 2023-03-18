@@ -2,3 +2,10 @@ body{
     background-color: #d0f0c0;
     justify-content: right;
 }
+
+img {
+    height: 550px;
+    width: auto;
+    float: right;
+    transform: translate(-5%,5%);
+  }

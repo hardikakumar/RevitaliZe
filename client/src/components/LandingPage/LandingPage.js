@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import './LandingPage.css'
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import logo from '../assets/images/logo.png';
-import dietPlanImg from '../assets/images/dietPlan.jpg';
-import nutritionist from '../assets/images/nutritionist.jpg';
-import reminders from '../assets/images/reminder.png';
-import vatta from '../assets/images/dosha.png';
+import logo from '../../assets/images/logo.png';
+import dietPlanImg from '../../assets/images/dietPlan.jpg';
+import nutritionist from '../../assets/images/nutritionist.jpg';
+import reminders from '../../assets/images/reminder.png';
+import vatta from '../../assets/images/dosha.png';
 import SignUpForm from './SignUpForm.js'
 import LoginForm from './LoginForm.js'
 
@@ -18,7 +19,7 @@ function LandingPage() {
       {/* Header */}
       <header>
         <div>
-          <img src={logo} alt="Logo" />
+          <img style={{ height: 60, left: 20 }} src={logo} alt="Logo" />
         </div>
       </header>
 

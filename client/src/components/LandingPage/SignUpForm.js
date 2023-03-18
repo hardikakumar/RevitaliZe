@@ -1,8 +1,7 @@
 import React from 'react';
-import { Form, Row, Col } from 'reactstrap';
+import { Form, Row, Col , Input} from 'reactstrap';
 import {useState} from 'react';
 import axios from 'axios';
-import Input from "./Input"
 
 function SignUpForm() 
 {
@@ -46,6 +45,7 @@ function SignUpForm()
             alert('Signup failed');
         }
     };
+
     return (
         <div>
             <Form>
@@ -65,6 +65,7 @@ function SignUpForm()
                     </Col>
                 </Row>
 
+                <div><p></p></div>
                 <Row>
                     <Col>
                         <div>
@@ -80,6 +81,8 @@ function SignUpForm()
                         </div>
                     </Col>
                 </Row>
+
+                <div><p></p></div>
                 <Row>
                     <Col>
                         <div>
@@ -95,6 +98,8 @@ function SignUpForm()
                         </div>
                     </Col>
                 </Row>
+
+                <div><p></p></div>
                 <Row>
                     <Col>
                         <div>
@@ -110,6 +115,8 @@ function SignUpForm()
                         </div>
                     </Col>
                 </Row>
+
+                <div><p></p></div>
                 <Row>
                     <Col>
                         <div>
@@ -125,11 +132,11 @@ function SignUpForm()
                         </div>
                     </Col>
                 </Row>
+
                 <div><p></p></div>
-                <button type='submit' onClick={handleSubmit}>
+                <button className='btn btn-warning' type='submit' onClick={handleSubmit}>
                     SUBMIT 
                 </button>
-                
             </Form>
         </div>
     );
