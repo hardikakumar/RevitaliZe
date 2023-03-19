@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Form, Row, Col , Input} from 'reactstrap';
-import {useState} from 'react';
+import { useNavigate} from "react-router-dom";
 import axios from 'axios';
 
 function SignUpForm() 
@@ -31,6 +31,7 @@ function SignUpForm()
         setPassword(event.target.value)
     };
 
+    const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -38,7 +39,8 @@ function SignUpForm()
 
         try{
             const response = await axios.post('http://localhost:5000/users', {name,age,gender,email, password});
-            alert('Signup Successfull!');
+            navigate('/questionnaire');
+            // alert('Signup Successfull!');
         }
         catch (error) {
             console.error(error);

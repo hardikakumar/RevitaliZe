@@ -57,19 +57,21 @@ function LandingPage() {
         </Modal>
       </div>
 
-      {/* Navigation menu */}
-      <nav>
-        <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <ul>
-          <li><button className='btn btn-warning' onClick={() => showSignUp(true)}>Sign Up</button></li>
-          <li><button className='btn btn-warning' onClick={() => showLogin(true)}>Login</button></li>
-        </ul>
-      </nav>
+      <div>
+        {/* Navigation menu */}
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <ul>
+            <li><button className='btn btn-warning' onClick={() => showSignUp(true)}>Sign Up</button></li>
+            <li><button className='btn btn-warning' onClick={() => showLogin(true)}>Login</button></li>
+          </ul>
+        </nav>
+      </div>
 
       {/* Hero section */}
       <section className="hero">

@@ -1,11 +1,94 @@
-body{
-    background-color: #d0f0c0;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.setBackground {
+    background-color: #D0F0C0;
+    display: flex;
     justify-content: right;
+    align-items: center;
+    min-height: 100vh;
+    font-family: "Verdana", cursive, sans-serif;
+    color: #ffffff;
 }
 
 img {
     height: 550px;
     width: auto;
     float: right;
-    transform: translate(-5%,5%);
-  }
+    transform: translate(-5%);
+}
+
+.app {
+    background-color: #252D4A;
+    width: 450px;
+    min-height: 200px;
+    height: min-content;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 10px 10px 42px 0px rgba(63, 59, 59, 0.75);
+    display: flex;
+    justify-content: space-evenly;
+    transform: translate(-40%);
+}
+
+.score-section {
+    display: flex;
+    font-size: 24px;
+    align-items: center;
+}
+
+.question-section {
+    width: 100%;
+    position: relative;
+}
+
+.question-count {
+    margin-bottom: 20px;
+}
+
+.question-count span {
+    font-size: 28px;
+}
+
+.question-text {
+    margin-bottom: 12px;
+}
+
+.answer-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+button[type="options"] {
+    width: 100%;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #252d4a;
+    border-radius: 15px;
+    display: flex;
+    padding: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    border: 5px solid #234668;
+    cursor: pointer;
+}
+
+button[type="options"]:hover {
+    background-color: #555e7d;
+}
+
+button[type="options"]:focus {
+    outline: none;
+}
+
+button[type="options"] svg {
+    margin-right: 5px;
+}
