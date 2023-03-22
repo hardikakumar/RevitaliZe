@@ -22,10 +22,15 @@ const UserSchema = new Schema({
         type: String,
         length: 20
     },
+    
     userId: {
         type: String,
         length: 20
-    }
+    },
+    password: {
+        type: String,
+        length: 20
+    },
 }
 )
 
