@@ -44,24 +44,26 @@ app.post('/users', async (req, res) => {
 });
 
 // LOGIN FORM 
-app.post("/userLogin", async (req, res) => {
-    const { email, password } = req.body;
-    UserModel.findOne({ email: email }).then((users) => {
-
-        if (users) {
-
+app.post("/userLogin", async (req,res) => {
+    const{ email,password } = req.body;
+    UserModel.findOne({ email: email}).then( (users) => {
+        
+        if(users)
+        {
+            
             console.log(password);
-            console.log(users.encryptedPasscode);
-            console.log(users);
+            console.log( users.encryptedPasscode);
+            console.log( users);
             encryptedPasscode = sha256(password);
-            if (encryptedPasscode === users.encryptedPasscode) {
+            if(encryptedPasscode === users.encryptedPasscode) 
+            {
                 res.send(users.name);
-                res.status(200).send({ message: "Login Successfull" })
+                res.status(200).send({message: "Login Successfull"})
             } else {
-                res.status(400).send({ message: "Password didn't match" })
+                res.status(400).send({ message: "Password didn't match"})
             }
         } else {
-            res.status(404).send({ message: "User not registered" })
+            res.status(404).send({message: "User not registered"})
         }
     }).catch(err => {
         console.log(err);
