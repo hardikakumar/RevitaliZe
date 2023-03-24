@@ -7,12 +7,12 @@ const UserSchema = new Schema({
         length: 100
     },
     age: {
-        type: String,
+        type: Number,
         length: 2
     },
     gender: {
         type: String,
-        length: 100
+        length: 1
     },
     email: {
         type: String,

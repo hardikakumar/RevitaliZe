@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import photo from './images/photo.png';
+import { useNavigate} from "react-router-dom";
 import './Questionnaire.css';
 
 const Questionnaire = () => {
@@ -41,6 +42,8 @@ const Questionnaire = () => {
     setShowScore(false);
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className='setBackground'>
       <div className='app'>
@@ -48,7 +51,8 @@ const Questionnaire = () => {
           <div className='score-section'>
             You have scored {score} out of {questionBank.length}
             <>
-              <button type="submit" onClick={resetQuiz}>Play Again!!</button>
+              {/* <button type="submit" onClick={resetQuiz}>Play Again!!</button> */}
+              <button type="submit" onClick={navigate('/dashboard')}>Play Again!!</button>
             </>
           </div>
         )

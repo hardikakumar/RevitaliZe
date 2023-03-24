@@ -6,7 +6,6 @@ import logo from '../../assets/images/logo.png';
 import dietPlanImg from '../../assets/images/dietPlan.jpg';
 import nutritionist from '../../assets/images/nutritionist.jpg';
 import reminders from '../../assets/images/reminder.png';
-import vatta from '../../assets/images/dosha.png';
 import SignUpForm from './SignUpForm.js'
 import LoginForm from './LoginForm.js'
 
