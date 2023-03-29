@@ -10,10 +10,6 @@ const QuesSchema = new Schema({
         type: String,
         length: 1
     },
-    idx: {
-        type: Number,
-        length: 20
-    },
 }
 )
 

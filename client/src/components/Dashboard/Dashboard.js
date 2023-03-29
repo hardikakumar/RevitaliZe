@@ -3,7 +3,9 @@ import MainDashboard from './MainDashboard';
 import Navbar from './NavBar';
 import Sidebar from './SideBar';
 
-function Dashboard() {
+function Dashboard() 
+{
+    
     return (
         <div>
             <Navbar />
