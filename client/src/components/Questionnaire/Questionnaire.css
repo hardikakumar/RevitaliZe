@@ -10,7 +10,7 @@ body {
 .setBackground {
     background-color: #D0F0C0;
     display: flex;
-    justify-content: right;
+    /* justify-content: right; */
     align-items: center;
     min-height: 100vh;
     font-family: "Verdana", cursive, sans-serif;
@@ -20,21 +20,28 @@ body {
 img {
     height: 550px;
     width: auto;
-    float: right;
-    transform: translate(-5%);
+    /* float: right; */
+    transform: translate(20%);
+}
+
+.welcomeMsg {
+    color: #252D4A;
+    transform: translate(10%, -1000%);
 }
 
 .app {
-    background-color: #252D4A;
+    /* background-color: #252D4A; */
+    background-color: #EAA222;
     width: 450px;
     min-height: 200px;
     height: min-content;
     border-radius: 15px;
     padding: 20px;
     box-shadow: 10px 10px 42px 0px rgba(63, 59, 59, 0.75);
-    display: flex;
+    /* display: flex; */
     justify-content: space-evenly;
-    transform: translate(-40%);
+    translate: transform(70%)
+    /* transform: translate(0%); */
 }
 
 .score-section {
@@ -45,7 +52,7 @@ img {
 
 .question-section {
     width: 100%;
-    position: relative;
+    /* position: relative; */
 }
 
 .question-count {
