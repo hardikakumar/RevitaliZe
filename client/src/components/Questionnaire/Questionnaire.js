@@ -1,9 +1,29 @@
 import React, { useState } from 'react';
 import photo from './images/photo.png';
-import { useNavigate} from "react-router-dom";
+import { useNavigate,useLocation} from "react-router-dom";
 import './Questionnaire.css';
+import axios from 'axios';
+//import moment from 'moment';
 
 const Questionnaire = () => {
+
+  const name = useLocation();
+  console.log(name.state);
+  const [currentQues, setCurrentQues] = useState(0);
+  try
+        {
+            axios.post('http://localhost:5000/questionnaire').then((data) => {
+            let idx = 3;
+            console.log(data.data[idx].ques)
+            }).catch(err => {
+              console.log(err);
+            })
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+
   var questionBank = [
     {
       Question: 'This is question 1',
@@ -23,8 +43,7 @@ const Questionnaire = () => {
     }
   ]
 
-  //useState Hook
-  const [currentQues, setCurrentQues] = useState(0);
+
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
@@ -45,7 +64,9 @@ const Questionnaire = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='setBackground'>
+    
+    <div className='setBackground' >
+    {/* <div className = 'heading'> <h1>WELCOME {name.state.name}</h1></div> */}
       <div className='app'>
         {showScore ? (
           <div className='score-section'>
@@ -63,11 +84,13 @@ const Questionnaire = () => {
                   <span>{currentQues+1}</span>/{questionBank.length}
                 </div>
                 <div className='question-text'>
+
                   {questionBank[currentQues].Question}
                 </div>
               </div>
 
               <div className='answer-section'>
+                
                 {questionBank[currentQues].AnswerText.map(answer => (
                   <button type='options' onClick={() => handleAnswerResponse(answer.isCorrect)}>{answer.Answer}</button>
                 ))}

@@ -16,7 +16,10 @@ body {
     font-family: "Verdana", cursive, sans-serif;
     color: #ffffff;
 }
-
+.heading{
+    padding-bottom: 15px;
+    justify-content: right;
+}
 img {
     height: 550px;
     width: auto;

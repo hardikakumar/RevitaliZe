@@ -23,9 +23,9 @@ const UserSchema = new Schema({
         length: 20
     },
     
-    userId: {
+    counter: {
         type: String,
-        length: 20
+        length: 10
     },
     password: {
         type: String,
