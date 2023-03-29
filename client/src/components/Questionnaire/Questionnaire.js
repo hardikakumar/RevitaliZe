@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
 import photo from './images/photo.png';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate,useLocation} from "react-router-dom";
 import './Questionnaire.css';
-import Rating from 'react-rating-scale'
+import axios from 'axios';
+//import moment from 'moment';
 
 const Questionnaire = () => {
-  // const name = useLocation();
-  // console.log(name.state.name+" Questionnaire");
+
+  const name = useLocation();
+  console.log(name.state);
+  const [currentQues, setCurrentQues] = useState(0);
+  try
+        {
+            axios.post('http://localhost:5000/questionnaire').then((data) => {
+            let idx = 3;
+            console.log(data.data[idx].ques)
+            }).catch(err => {
+              console.log(err);
+            })
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
 
   var questionBank = [
     {
@@ -27,8 +43,7 @@ const Questionnaire = () => {
     }
   ]
 
-  //useState Hook
-  const [currentQues, setCurrentQues] = useState(0);
+
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 

@@ -3,7 +3,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react';
 import { Form, Col, FormFeedback, FormGroup } from 'reactstrap';
-import { useNavigate } from "react-router-dom";
+import { isRouteErrorResponse, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function SignUpForm() {
@@ -65,7 +65,14 @@ function SignUpForm() {
         }
         catch (error) {
             console.error(error);
-            alert('Signup failed');
+            console.log(error);
+            if(error.response.status == 403)
+            {
+                alert(error.response.data.message);
+            }
+            else
+            {
+            alert('Signup failed');}
         }
     };
 

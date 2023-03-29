@@ -28,12 +28,17 @@ function LoginForm() {
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/userLogin', { email, password });
+
+        // const formData = {email, password}
+
+        try
+        {
+            const response = await axios.post('http://localhost:5000/userLogin', {email, password});
+            console.log(response);
             const name = response.data;
-            console.log(name + " LoginForm");
-            // alert('Login successfull');
-            navigate('/questionnaire', { state: { name: name } });
+            console.log(response.data);
+            alert('Login successfull');
+            navigate('/questionnaire',{state : {name:name}});
         }
         catch (error) {
             console.error(error);
