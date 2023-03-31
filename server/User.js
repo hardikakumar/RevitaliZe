@@ -22,7 +22,11 @@ const UserSchema = new Schema({
         type: String,
         length: 20
     },
-    
+    phone:
+    {
+        type: String,
+        length: 14
+    },
     counter: {
         type: String,
         length: 10

@@ -29,9 +29,9 @@ let items;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// SIGNU-UP FORM
+// SIGN-UP FORM
 app.post("/users", async (req, res) => {
-  const { name, age, gender, email, password } = req.body;
+  const { name, age, gender, email,phone, password } = req.body;
   UserModel.findOne({ email: email }).then((users) => {
       if (users) 
       {
@@ -39,6 +39,12 @@ app.post("/users", async (req, res) => {
       }
       else
         {
+          UserModel.findOne({ phone: phone }).then((users) => {
+            if (users) 
+            {
+              res.status(403).send({message:"User already registered"})
+            }
+            else{
           let counter = 1;
           encryptedPasscode = sha256(password);
           const user = new UserModel({
@@ -46,6 +52,7 @@ app.post("/users", async (req, res) => {
             age,
             gender,
             email,
+            phone,
             encryptedPasscode,
             counter,
           });
@@ -53,7 +60,9 @@ app.post("/users", async (req, res) => {
           user.save();
           console.log("User object:", user);
           res.send(user);}
-    })
+        })
+    }
+  })
     .catch((err) => {
       console.log(err);
     });
