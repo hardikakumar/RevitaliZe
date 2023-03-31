@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Questionnaire from './components/Questionnaire/Questionnaire.js';
 import Dashboard from './components/Dashboard/Dashboard.js';
+import Reminder from './components/Reminders/Reminders.js';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -16,6 +17,7 @@ root.render(
       <Route exact path="/" element={<App />} />
       <Route path="/questionnaire" element={<Questionnaire />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/reminder" element={<Reminder />} />
     </Routes>
   </BrowserRouter>
 );

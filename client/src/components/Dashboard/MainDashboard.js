@@ -9,7 +9,6 @@ import { TbAwardFilled } from "react-icons/tb";
 import axios from 'axios';
 
 const MainDashboard = () => {
-
     const [record, setRecord] = useState([])
 
     try
@@ -64,7 +63,6 @@ const MainDashboard = () => {
                     <div className="card text-white bg-danger h-100">
                         <div className="card-body bg-danger">
                             <div className="rotate">
-                                {/* <i className="fa fa-solid fa-fire fa-5x"></i> */}
                                 <FaFire style={{fontSize: '70px'}}/>
                                 <p></p>
                             </div>
@@ -77,8 +75,6 @@ const MainDashboard = () => {
                     <div className="card text-white bg-info h-100">
                         <div className="card-body bg-info">
                             <div className="rotate">
-                                {/* <i className="fa fa-solid fa-circle fa-5x"></i> */}
-                                {/* <i className="fa fa-solid fa-firefox fa-5x"></i> */}
                                 <FaFirefox style={{fontSize: '70px'}}/>
                                 <p></p>
                             </div>
@@ -91,7 +87,6 @@ const MainDashboard = () => {
                     <div class="card text-white bg-warning h-100">
                         <div class="card-body">
                             <div class="rotate">
-                                {/* <i class="fa fa-share fa-4x"></i> */}
                                 <TbAwardFilled style={{fontSize: '70px'}}/>
                                 <p></p>
                             </div>
