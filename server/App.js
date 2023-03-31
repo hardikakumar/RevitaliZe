@@ -5,14 +5,16 @@ const cors = require("cors");
 var sha256 = require("js-sha256"); // For Encryption
 
 const mongoose = require("mongoose"); // For Database
-// const userSchema = new mongoose.Schema({collection: 'users' });
-// const UserModel = mongoose.model('User',{},'users');
 
-const UserModel = require("./User.js");
+
+
 const DB =
   "mongodb+srv://singh:singh@cluster0.qiskiyr.mongodb.net/revitalize?retryWrites=true&w=majority";
 
+const UserModel = require("./User.js");
 const QuesModel = require("./Ques.js");
+const HealthTipsModel = require("./HealthTips.js");
+
 
 mongoose
   .connect(DB)
@@ -88,9 +90,19 @@ app.get("/users", async (req, res) => {
   res.send(users);
 });
 
+// QUESTIONNAIRE
+
 app.post("/questionnaire", async(req, res) => {
-  //const { idx } = req.body;
-  const v = await QuesModel.find()
-     res.status(200).send(v);
+  const ques = await QuesModel.find()
+     console.log(ques);
+     res.status(200).send(ques);
  });
+
+// DAILY HEALTH TIPS
+
+app.post("/DailyHealthTips", async(req,res) => {
+  const healthTips = await HealthTipsModel.find()
+  console.log(healthTips);
+  res.status(200).send(healthTips);
+})
 app.listen(5000, () => console.log("Backend is running"));

@@ -6,21 +6,26 @@ import { FaFire } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa";
 import { FaFirefox } from "react-icons/fa";
 import { TbAwardFilled } from "react-icons/tb";
+import axios from 'axios';
 
 const MainDashboard = () => {
 
     const [record, setRecord] = useState([])
 
-    // const getData = () => {
-    //     fetch('https://jsonplaceholder.typicode.com/users')
-    //         .then(resposne => resposne.json())
-    //         .then(res => setRecord(res))
-    // }
-
-    // useEffect(() => {
-    //     getData();
-    // },)
-
+    try
+        {
+            axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
+            let idx = 3;
+            console.log(data.data[idx].tip)
+            }).catch(err => {
+              console.log(err);
+            })
+        }
+        catch(error)
+        {
+            console.error(error);
+        }
+    
 
     return (
         <div className="col main pt-5 mt-3">
