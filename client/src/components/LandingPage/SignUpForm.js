@@ -3,18 +3,20 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import React, { useState } from 'react';
 import { Form, Col, FormFeedback, FormGroup } from 'reactstrap';
-import { isRouteErrorResponse, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import 'react-phone-number-input/style.css';
 
 function SignUpForm() {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [gender, setGender] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-
+// -----------NAME-----------
     const handleNameChange = (event) => {
         setName(event.target.value)
     };
@@ -23,6 +25,7 @@ function SignUpForm() {
         return /^[a-zA-Z ]{2,30}$/.test(name);
     }
 
+// -----------AGE-----------
     const handleAgeChange = (event) => {
         setAge(event.target.value)
     };
@@ -31,10 +34,12 @@ function SignUpForm() {
         return age >= 10 && age <= 99;
     }
 
+// -----------GENDER-----------
     const handleGenderChange = (event) => {
         setGender(event.target.value)
     };
 
+// -----------EMAIL-----------    
     const handleEmailChange = (event) => {
         setEmail(event.target.value)
     };
@@ -43,6 +48,32 @@ function SignUpForm() {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     }
 
+// -----------PHONE-----------    
+    const handlePhoneChange = (event) => {
+        setPhone(event.target.value);
+        console.log(phone)
+        console.log(phone.length)
+    };
+
+    const isValidPhone = (phone) => {
+        return phone.length==14;
+    }
+
+    const formatPhoneNumber = (value) => {
+        if (!value) return value;
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+        if (phoneNumberLength < 4) return phoneNumber;
+        if (phoneNumberLength < 7) {
+            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+        }
+        return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+            3,
+            6,
+        )}-${phoneNumber.slice(6, )}`;
+    }
+
+// -----------PASSWORD-----------    
     const handlePasswordChange = (event) => {
         setPassword(event.target.value)
     };
@@ -53,11 +84,12 @@ function SignUpForm() {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+// -----------SUBMIT-----------    
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password)) {
+            if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password) && isValidPhone(phone)) {
                 const response = await axios.post('http://localhost:5000/users', { name, age, gender, email, password });
                 navigate('/questionnaire');
             }
@@ -66,13 +98,12 @@ function SignUpForm() {
         catch (error) {
             console.error(error);
             console.log(error);
-            if(error.response.status == 403)
-            {
+            if (error.response.status == 403) {
                 alert(error.response.data.message);
             }
-            else
-            {
-            alert('Signup failed');}
+            else {
+                alert('Signup failed');
+            }
         }
     };
 
@@ -156,6 +187,29 @@ function SignUpForm() {
                         </div>
                     </Col>
                 </FormGroup>
+
+                <FormGroup row>
+                    <Col>
+                        <div>
+                            <TextField
+                                id="outlined-error-helper-text"
+                                required
+                                fullWidth
+                                label="Phone"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start">+91</InputAdornment>,
+                                  }}
+                                placeholder="Enter phone number"
+                                value={formatPhoneNumber(phone)}
+                                onChange={handlePhoneChange}
+                                error={phone !== '' ? !isValidPhone(phone) : false}
+                                helperText={(phone === "" | isValidPhone(phone)) ? "" : "Phone number should contain 10 digits"}
+                            />
+                        </div>
+                    </Col>
+                </FormGroup>
+
                 <FormControl
                     required
                     fullWidth

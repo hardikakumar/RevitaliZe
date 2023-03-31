@@ -16,10 +16,12 @@ body {
     font-family: "Verdana", cursive, sans-serif;
     color: #ffffff;
 }
-.heading{
+
+.heading {
     padding-bottom: 15px;
     justify-content: right;
 }
+
 img {
     height: 550px;
     width: auto;
@@ -44,7 +46,7 @@ img {
     /* display: flex; */
     justify-content: space-evenly;
     translate: transform(70%)
-    /* transform: translate(0%); */
+        /* transform: translate(0%); */
 }
 
 .score-section {
@@ -77,6 +79,12 @@ img {
     justify-content: space-between;
 }
 
+.btn-xl {
+    padding: 10px 20px;
+    font-size: 70px;
+    border-radius: 10px;
+}
+
 button[type="options"] {
     width: 100%;
     font-size: 16px;
@@ -102,3 +110,4 @@ button[type="options"]:focus {
 button[type="options"] svg {
     margin-right: 5px;
 }
+
