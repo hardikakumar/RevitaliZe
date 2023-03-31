@@ -90,7 +90,7 @@ function SignUpForm() {
         event.preventDefault();
         try {
             if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password) && isValidPhone(phone)) {
-                const response = await axios.post('http://localhost:5000/users', { name, age, gender, email, password });
+                const response = await axios.post('http://localhost:5000/users', { name, age, gender, email,phone, password });
                 navigate('/questionnaire');
             }
             else alert('Please enter correct details');

@@ -31,26 +31,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // SIGNU-UP FORM
 app.post("/users", async (req, res) => {
-  const { name, age, gender, email, password } = req.body;
+  const { name, age, gender, email,phone, password } = req.body;
   UserModel.findOne({ email: email }).then((users) => {
-    if (users) {
-      res.status(403).send({ message: "User already registered" })
-    }
-    else {
-      let counter = 1;
-      encryptedPasscode = sha256(password);
-      const user = new UserModel({
-        name,
-        age,
-        gender,
-        email,
-        encryptedPasscode,
-        counter,
-      });
-
-      user.save();
-      console.log("User object:", user);
-      res.send(user);
+      if (users) 
+      {
+        res.status(403).send({message:"User already registered"})
+      }
+      else
+        {
+          UserModel.findOne({ phone: phone }).then((users) => {
+            if (users) 
+            {
+              res.status(403).send({message:"User already registered"})
+            }
+            else{
+          let counter = 1;
+          encryptedPasscode = sha256(password);
+          const user = new UserModel({
+            name,
+            age,
+            gender,
+            email,
+            phone,
+            encryptedPasscode,
+            counter,
+          });
+        
+          user.save();
+          console.log("User object:", user);
+          res.send(user);}
+        })
     }
   })
     .catch((err) => {
