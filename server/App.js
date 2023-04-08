@@ -11,6 +11,7 @@ const DB =
 
 const UserModel = require("./User.js");
 const QuesModel = require("./Ques.js");
+const DoshaReportModel = require("./DoshaReport.js");
 const HealthTipsModel = require("./HealthTips.js");
 const ReminderModel = require("./Reminder.js");
 
@@ -74,17 +75,19 @@ app.post("/userLogin", async (req, res) => {
   const { email, password } = req.body;
   UserModel.findOne({ email: email })
     .then((users) => {
-      if (users) {
-        console.log(password);
-        console.log(users.encryptedPasscode);
-        console.log(users);
+      if (users) 
+      {
         encryptedPasscode = sha256(password);
-        if (encryptedPasscode === users.encryptedPasscode) {
-          res.status(200).send(users.name);
-        } else {
+        if (encryptedPasscode === users.encryptedPasscode) 
+        {
+          res.status(200).send(users);
+        } else 
+        {
           res.status(400).send({ message: "Password didn't match" });
         }
-      } else {
+      } 
+      else 
+      {
         res.status(404).send({ message: "User not registered" });
       }
     })
@@ -113,6 +116,31 @@ app.post("/DailyHealthTips", async (req, res) => {
   console.log(healthTips);
   res.status(200).send(healthTips);
 })
+
+// GENERATE DOSHA REPORT & POSTING IT IN DATABASE
+
+app.post("/doshareport", (req, res) => {
+  const { vatta, pitta, kapha, member_id,date } = req.body;
+        const doshareport = new DoshaReportModel({
+          member_id,
+          date,
+          vatta,
+          pitta,
+          kapha,
+        });
+        doshareport.save();
+        //console.log(doshareport);
+  console.log(doshareport);
+});
+
+// FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
+
+app.get("/DoshaReportRecords", async(req, res) => {
+  const { member_id } = req.body;
+  const reports = await DoshaReportModel.find({member_id:member_id})
+  console.log(reports);
+ // res.status(200).send(ques);
+});
 
 
 //REMINDERS

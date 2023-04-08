@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
+
     name: {
         type: String,
         length: 100
@@ -34,6 +35,10 @@ const UserSchema = new Schema({
     password: {
         type: String,
         length: 20
+    },
+    member_id: {
+        type: String,
+        length: 29
     },
 }
 )

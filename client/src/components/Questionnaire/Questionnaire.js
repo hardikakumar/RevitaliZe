@@ -8,19 +8,25 @@ import { Button } from 'react-bootstrap';
 import { MDBBtn, MDBBtnGroup, MDBContainer } from "mdb-react-ui-kit";
 
 const Questionnaire = () => {
-  const name = useLocation();
+  const id = useLocation();
+  const member_id = id.state.id;
+  console.log(member_id);
 
+  const navigate = useNavigate();
   const [currentQues, setCurrentQues] = useState(0);
   const [sliderPos, setSlider] = useState({ x: 5 });
   const [showStart, setShowStart] = useState(true);
   const [questions, setQues] = useState([]);
-  const [vatta, setVatta] = useState(0);
-  const [pitta, setPitta] = useState(0);
-  const [kapha, setKapha] = useState(0);
+  var [vatta, setVatta] = useState(0);
+  var [pitta, setPitta] = useState(0);
+  var [kapha, setKapha] = useState(0);
+ 
+  
 
-
-  try {
-    axios.post('http://localhost:5000/questionnaire').then((data) => {
+  try 
+  {
+    axios.post('http://localhost:5000/questionnaire').then((data) =>
+    {
       questions.push(data.data);
     }).catch(err => {
       console.log(err);
@@ -30,17 +36,33 @@ const Questionnaire = () => {
     console.error(error);
   }
 
-  const navigate = useNavigate();
   const handleSubmit = () => {
+    const date = Date().toLocaleString();
     console.log(Date().toLocaleString())  //Current Date & Time
     //Vatta, Pitta & Kapha store scores corresponding to these doshas
 
     try {
+      vatta = ((vatta-4)/12)*10;
+      pitta = ((pitta-4)/12)*10;
+      kapha = ((kapha-4)/12)*10;
+      vatta = Math.round((vatta + Number.EPSILON) * 100) / 100
+      pitta = Math.round((pitta + Number.EPSILON) * 100) / 100
+      kapha = Math.round((kapha + Number.EPSILON) * 100) / 100
+      // var v = 5;
+      // var p = 23;
+      // var k = 234;
+    
+      axios.post('http://localhost:5000/doshareport', {vatta, pitta, kapha, member_id, date});
+    {
       navigate('/dashboard', { state: { name: "Hardika" } })
-    } catch (error) {
-
+    }
+    } catch (error) 
+    {
+      console.error(error);
     }
   }
+      
+
 
   const handleAnswerResponse = (pos) => {
     var addScore;
