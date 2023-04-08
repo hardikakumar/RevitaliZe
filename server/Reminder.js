@@ -10,6 +10,9 @@ const ReminderSchema = new Schema({
     },
     isReminded: {
         type: Boolean
+    },
+    reminderFreq: {
+        type: Number
     }
 }
 )

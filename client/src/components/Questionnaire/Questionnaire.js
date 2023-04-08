@@ -5,6 +5,7 @@ import './Questionnaire.css';
 import axios from 'axios';
 import Slider from 'react-input-slider';
 import { Button } from 'react-bootstrap';
+import { MDBBtn, MDBBtnGroup, MDBContainer } from "mdb-react-ui-kit";
 
 const Questionnaire = () => {
   const name = useLocation();
@@ -33,7 +34,7 @@ const Questionnaire = () => {
   const handleSubmit = () => {
     console.log(Date().toLocaleString())  //Current Date & Time
     //Vatta, Pitta & Kapha store scores corresponding to these doshas
-    
+
     try {
       navigate('/dashboard', { state: { name: "Hardika" } })
     } catch (error) {
@@ -110,6 +111,27 @@ const Questionnaire = () => {
                       x={sliderPos.x}
                       onChange={({ x }) => setSlider({ x: parseFloat(x.toFixed(2)) })}
                     />
+
+                    {/* <MDBContainer className="d-flex justify-content-center">
+                      <div className="mx-0 mx-sm-auto">
+                        <p className="fw-bold text-center">
+                          {questions[0][currentQues].ques}
+                        </p>
+
+                        <MDBBtnGroup aria-label="Basic example" className="me-2">
+                          <MDBBtn color="light">0</MDBBtn>
+                          <MDBBtn color="light">2</MDBBtn>
+                          <MDBBtn color="light">3</MDBBtn>
+                          <MDBBtn color="light">4</MDBBtn>
+                          <MDBBtn color="light">5</MDBBtn>
+                          <MDBBtn color="light">6</MDBBtn>
+                          <MDBBtn color="light">7</MDBBtn>
+                          <MDBBtn color="light">8</MDBBtn>
+                          <MDBBtn color="light">9</MDBBtn>
+                          <MDBBtn color="light" onClick={null}>10</MDBBtn>
+                        </MDBBtnGroup>
+                      </div>
+                    </MDBContainer> */}
 
                     <br />
                     <Button onClick={() => handleAnswerResponse(sliderPos.x)} variant='light'>Next</Button>

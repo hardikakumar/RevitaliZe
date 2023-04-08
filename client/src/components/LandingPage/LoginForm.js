@@ -38,7 +38,7 @@ function LoginForm() {
             const name = response.data;
             console.log(response.data);
             alert('Login successfull');
-            navigate('/questionnaire',{state : {name:name}});
+            navigate('/dashboard',{state : {name:name}});
         }
         catch (error) {
             console.error(error);

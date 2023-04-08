@@ -98,28 +98,7 @@ const MainDashboard = () => {
             </div>
 
             <hr />
-            {/* <div class="row placeholders mb-3">
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/dddddd/fff?text=1" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Responsive</h4>
-                <span class="text-muted">Device agnostic</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/e4e4e4/fff?text=2" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Frontend</h4>
-                <span class="text-muted">UI / UX oriented</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/d6d6d6/fff?text=3" class="mx-auto img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>HTML5</h4>
-                <span class="text-muted">Standards-based</span>
-            </div>
-            <div class="col-6 col-sm-3 placeholder text-center">
-                <img src="//placehold.it/200/e0e0e0/fff?text=4" class="center-block img-fluid rounded-circle" alt="Generic placeholder thumbnail"/>
-                <h4>Framework</h4>
-                <span class="text-muted">CSS and JavaScript</span>
-            </div>
-        </div> */}
+    
 
             <div class="row ">
                 <div class="col-lg-7 col-md-6 col-sm-12">

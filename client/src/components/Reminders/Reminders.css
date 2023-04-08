@@ -1,7 +1,7 @@
 .Reminder {
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
     background: white;
-    position: relative
+    position: relative;
 }
 
 .reminder_homepage_header>.button {

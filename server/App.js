@@ -122,17 +122,21 @@ setInterval(() => {
       reminderList.forEach(reminder => {
         if (!reminder.isReminded) {
           const now = new Date()
-          if ((new Date(reminder.remindAt) - now) < 0) {
-            ReminderModel.findByIdAndUpdate(reminder._id, { isReminded: true }).then((remindObj) => {
+          var reminderTime = new Date(reminder.remindAt);
+          if ((reminderTime - now) < 0) {
+            // ReminderModel.findByIdAndUpdate(reminder._id, { isReminded: true }).then((remindObj) => {
+              reminderTime.setHours(reminderTime.getHours()+reminder.reminderFreq);
+              ReminderModel.findByIdAndUpdate(reminder._id, { remindAt: reminderTime }).then((remindObj) => {
               const accountSid = process.env.WHATSAPP_ACCOUNT_SID;
               const authToken = process.env.WHATSAPP_AUTH_TOKEN;
               const client = require('twilio')(accountSid, authToken);
 
               client.messages
                 .create({
-                  body: reminder.reminderMsg,
+                  body: "A reminder from RevitaliZe: *"+reminder.reminderMsg+"*",
                   from: 'whatsapp:+14155238886',
                   to: 'whatsapp:+919829081906'
+                  // to: 'whatsapp:+918949291337'
                 }).then(message => console.log(message.sid));
             }).catch((err) => {
               console.log(err);
@@ -148,19 +152,19 @@ setInterval(() => {
 
 
 app.get("/getAllReminder", (req, res) => {
-  ReminderModel.find({}, (err, reminderList) => {
-    if (err) console.log(err);
+  ReminderModel.find({}).then((reminderList) => {
     if (reminderList) res.send(reminderList);
   })
 })
 
 
 app.post("/addReminder", async (req, res) => {
-  const { reminderMsg, remindAt } = req.body
+  const { reminderMsg, remindAt, reminderFreq } = req.body
   const reminder = new ReminderModel({
     reminderMsg,
     remindAt,
-    isReminded: false
+    isReminded: false,
+    reminderFreq
   })
 
   reminder.save();
