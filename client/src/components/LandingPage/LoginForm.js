@@ -35,10 +35,11 @@ function LoginForm() {
         {
             const response = await axios.post('http://localhost:5000/userLogin', {email, password});
             console.log(response);
-            const name = response.data;
-            console.log(response.data);
+            const name = response.data.name;
+            const id = response.data._id;
+            console.log(id);
             alert('Login successfull');
-            navigate('/questionnaire',{state : {name:name}});
+            navigate('/questionnaire',{state : {id:id}});
         }
         catch (error) {
             console.error(error);
