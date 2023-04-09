@@ -1,8 +1,9 @@
 import React from 'react';
 import MainDashboard from './MainDashboard';
+import Remedies from '../Remedies/Remedies';
 import Navbar from './NavBar';
 import Sidebar from './SideBar';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function Dashboard() {
     // const name = useLocation();
@@ -15,6 +16,7 @@ function Dashboard() {
                     {/* <Sidebar name={name.state.name} /> */}
                     <Sidebar />
                     <MainDashboard />
+                
                 </div>
             </div>
         </div>

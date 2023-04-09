@@ -1,13 +1,11 @@
 import './Reminders.css'
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-// import DateTimePicker from "react-datetime-picker"
 import { TextField, MenuItem } from "@mui/material";
 import { Form, FormGroup } from 'reactstrap';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateTimePicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
 
 function Reminders() {
     const [reminderMsg, setReminderMsg] = useState("")

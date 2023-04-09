@@ -8,9 +8,6 @@ const ReminderSchema = new Schema({
     remindAt: {
         type: String
     },
-    isReminded: {
-        type: Boolean
-    },
     reminderFreq: {
         type: Number
     }

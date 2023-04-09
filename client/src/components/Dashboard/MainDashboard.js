@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import DoshaChart from './DoshaChart';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './MainDashboard.css';
 import { FaFire } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa";
@@ -11,20 +9,18 @@ import axios from 'axios';
 const MainDashboard = () => {
     const [record, setRecord] = useState([])
 
-    try
-        {
-            axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
+    try {
+        axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
             let idx = 3;
             console.log(data.data[idx].tip)
-            }).catch(err => {
-              console.log(err);
-            })
-        }
-        catch(error)
-        {
-            console.error(error);
-        }
-    
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
+
 
     return (
         <div className="col main pt-5 mt-3">
@@ -51,7 +47,7 @@ const MainDashboard = () => {
                         <div className="card-body bg-success" style={{ backgroundColor: "#57b960" }}>
                             <div className="rotate">
                                 {/* <i className="fa fa-solid fa-leaf fa-5x"></i> */}
-                                <FaLeaf style={{fontSize: '70px'}}/>
+                                <FaLeaf style={{ fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Kapha</h6>
@@ -63,7 +59,7 @@ const MainDashboard = () => {
                     <div className="card text-white bg-danger h-100">
                         <div className="card-body bg-danger">
                             <div className="rotate">
-                                <FaFire style={{fontSize: '70px'}}/>
+                                <FaFire style={{ fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Pitta</h6>
@@ -75,7 +71,7 @@ const MainDashboard = () => {
                     <div className="card text-white bg-info h-100">
                         <div className="card-body bg-info">
                             <div className="rotate">
-                                <FaFirefox style={{fontSize: '70px'}}/>
+                                <FaFirefox style={{ fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Vata</h6>
@@ -87,7 +83,7 @@ const MainDashboard = () => {
                     <div class="card text-white bg-warning h-100">
                         <div class="card-body">
                             <div class="rotate">
-                                <TbAwardFilled style={{fontSize: '70px'}}/>
+                                <TbAwardFilled style={{ fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 class="text-uppercase">Streaks</h6>
@@ -98,7 +94,7 @@ const MainDashboard = () => {
             </div>
 
             <hr />
-    
+
 
             <div class="row ">
                 <div class="col-lg-7 col-md-6 col-sm-12">

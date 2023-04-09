@@ -148,11 +148,9 @@ setInterval(() => {
   ReminderModel.find({}).then((reminderList) => {
     if (reminderList) {
       reminderList.forEach(reminder => {
-        if (!reminder.isReminded) {
           const now = new Date()
           var reminderTime = new Date(reminder.remindAt);
           if ((reminderTime - now) < 0) {
-            // ReminderModel.findByIdAndUpdate(reminder._id, { isReminded: true }).then((remindObj) => {
               reminderTime.setHours(reminderTime.getHours()+reminder.reminderFreq);
               ReminderModel.findByIdAndUpdate(reminder._id, { remindAt: reminderTime }).then((remindObj) => {
               const accountSid = process.env.WHATSAPP_ACCOUNT_SID;
@@ -170,7 +168,6 @@ setInterval(() => {
               console.log(err);
             });
           }
-        }
       })
     }
   }).catch((err) => {
@@ -191,7 +188,6 @@ app.post("/addReminder", async (req, res) => {
   const reminder = new ReminderModel({
     reminderMsg,
     remindAt,
-    isReminded: false,
     reminderFreq
   })
 

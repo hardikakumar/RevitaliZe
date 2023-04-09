@@ -38,8 +38,6 @@ const Questionnaire = () => {
 
   const handleSubmit = () => {
     const date = Date().toLocaleString();
-    console.log(Date().toLocaleString())  //Current Date & Time
-    //Vatta, Pitta & Kapha store scores corresponding to these doshas
 
     try {
       vatta = ((vatta-4)/12)*10;
