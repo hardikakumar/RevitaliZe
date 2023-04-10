@@ -5,15 +5,19 @@ import Navbar from '../Dashboard/NavBar';
 import Sidebar from './SideBar';
 import axios from 'axios';
 import './DoctorDashboard.css'
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import './Remedies.css'
 
 const Remedies = () => {
-    const [RemedyName, setRem] = useState();
-    const [Description, setDesc] = useState();
-    //const [Type, setType] = useState();
-    const [Eczema, setEczema] = useState();
-    const [Hyperthyroidism, setHyper] = useState();
-    const [Hypothyroidism, setHypo] = useState();
-    const [PCOD, setPcod] = useState();
+    const [rem, setRem] = useState();
+    const [desc, setDesc] = useState();
+    const [eczema, setEczema] = useState();
+    const [hyper, setHyper] = useState();
+    const [hypo, setHypo] = useState();
+    const [pcod, setPcod] = useState();
+    const [remType, setRemType] = useState();
+    const [remDosha, setRemDosha] = useState();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -58,7 +62,7 @@ const Remedies = () => {
                                             <TextField
                                                 fullWidth
                                                 multiline
-                                                rows={2}
+                                                rows={3}
                                                 sx={{ width: 700 }}
                                                 label="Description"
                                                 value={Description}
@@ -67,15 +71,20 @@ const Remedies = () => {
                                         </div>
                                     </FormGroup>
 
+<<<<<<< HEAD
                                     
+=======
+>>>>>>> origin/hardika
 
                                     <FormGroup row>
-                                        <div>
-                                            <TextField
-                                                id="outlined-select-disease1"
-                                                select
-                                                fullWidth
+                                        <div className='checkbox-design1'>
+                                            <FormControlLabel control={
+                                                <Checkbox
+                                                    value={eczema}
+                                                    onChange={e => setEczema(e.target.checked)}
+                                                />}
                                                 label="Eczema"
+<<<<<<< HEAD
                                                 value={Eczema}
                                                 onChange={e => setEczema(e.target.value)}
                                             >
@@ -84,35 +93,73 @@ const Remedies = () => {
                                             </TextField>
                                         </div>
                                     </FormGroup>
+=======
+                                            />
+>>>>>>> origin/hardika
 
-                                    <FormGroup row>
-                                        <div>
-                                            <TextField
-                                                id="outlined-select-disease2"
-                                                select
-                                                fullWidth
+                                            <FormControlLabel control={
+                                                <Checkbox
+                                                    value={hyper}
+                                                    onChange={e => setHyper(e.target.checked)}
+                                                />}
                                                 label="Hyperthyroidism"
+<<<<<<< HEAD
                                                 value={Hyperthyroidism}
                                                 onChange={e => setHyper(e.target.value)}
                                             >
                                                 <MenuItem key={'T'} value={true}>True</MenuItem>
                                                 <MenuItem key={'F'} value={false}>False</MenuItem>
                                             </TextField>
+=======
+                                            />
+>>>>>>> origin/hardika
+                                        </div>
+
+                                        <div className='checkbox-design2'>
+                                            <FormControlLabel control={
+                                                <Checkbox
+                                                    value={hypo}
+                                                    onChange={e => setHypo(e.target.checked)}
+                                                />}
+                                                label="Hypothyroidism"
+<<<<<<< HEAD
+                                                value={Hypothyroidism}
+                                                onChange={e => setHypo(e.target.value)}
+=======
+                                            />
+
+                                            <FormControlLabel control={
+                                                <Checkbox
+                                                    value={pcod}
+                                                    onChange={e => setPcod(e.target.checked)}
+                                                />}
+                                                label="PCOD"
+                                            />
                                         </div>
                                     </FormGroup>
+
 
                                     <FormGroup row>
                                         <div>
                                             <TextField
-                                                id="outlined-select-disease3"
+                                                id="outlined-select-type"
                                                 select
                                                 fullWidth
-                                                label="Hypothyroidism"
-                                                value={Hypothyroidism}
-                                                onChange={e => setHypo(e.target.value)}
+                                                label="Remedy Type"
+                                                value={remType}
+                                                onChange={e => setRemType(e.target.value)}
+>>>>>>> origin/hardika
                                             >
-                                                <MenuItem key={'T'} value={true}>True</MenuItem>
-                                                <MenuItem key={'F'} value={false}>False</MenuItem>
+                                                <MenuItem key={'f'} value={'f'}>Fruits</MenuItem>
+                                                <MenuItem key={'v'} value={'v'}>Vegetables</MenuItem>
+                                                <MenuItem key={'g'} value={'g'}>Grains</MenuItem>
+                                                <MenuItem key={'l'} value={'l'}>Legumes</MenuItem>
+                                                <MenuItem key={'d'} value={'d'}>Dairy</MenuItem>
+                                                <MenuItem key={'n'} value={'n'}>Nuts/Seeds</MenuItem>
+                                                <MenuItem key={'m'} value={'m'}>Meat/Eggs</MenuItem>
+                                                <MenuItem key={'o'} value={'o'}>Oils</MenuItem>
+                                                <MenuItem key={'t'} value={'t'}>Sweeteners</MenuItem>
+                                                <MenuItem key={'s'} value={'s'}>Spices</MenuItem>
                                             </TextField>
                                         </div>
                                     </FormGroup>
@@ -120,15 +167,22 @@ const Remedies = () => {
                                     <FormGroup row>
                                         <div>
                                             <TextField
-                                                id="outlined-select-disease4"
+                                                id="outlined-select-dosha"
                                                 select
                                                 fullWidth
+<<<<<<< HEAD
                                                 label="PCOD"
                                                 value={PCOD}
                                                 onChange={e => setPcod(e.target.value)}
+=======
+                                                label="Remedy Dosha"
+                                                value={remDosha}
+                                                onChange={e => setRemDosha(e.target.value)}
+>>>>>>> origin/hardika
                                             >
-                                                <MenuItem key={'T'} value={true}>True</MenuItem>
-                                                <MenuItem key={'F'} value={false}>False</MenuItem>
+                                                <MenuItem key={'v'} value={'v'}>Vata</MenuItem>
+                                                <MenuItem key={'p'} value={'p'}>Pitta</MenuItem>
+                                                <MenuItem key={'k'} value={'k'}>Kapha</MenuItem>
                                             </TextField>
                                         </div>
                                     </FormGroup>
@@ -136,7 +190,7 @@ const Remedies = () => {
 
 
                                 <button className='btn btn-warning' type='submit' onClick={handleSubmit}>
-                                    SUBMIT
+                                    ADD REMEDY
                                 </button>
 
                             </div>
