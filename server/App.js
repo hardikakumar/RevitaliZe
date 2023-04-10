@@ -15,6 +15,7 @@ const DoshaReportModel = require("./DoshaReport.js");
 const RemediesModel = require("./Remedies.js");
 const ReminderModel = require("./Reminder.js");
 const HealthTipsModel = require("./HealthTips.js");
+const FeedbacksModel = require("./Feedback.js");
 
 mongoose
   .connect(DB)
@@ -134,15 +135,28 @@ app.post("/doshareport", (req, res) => {
 });
 
 
-// FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
+// FETCHING THE LATEST DOSHA REPORT OF THE PARTICULAR USER
+
 app.post("/latestDoshaScore", async(req, res) => {
   const { member_id } = req.body;
-  const reports = await DoshaReportModel.find({member_id:member_id})
-  console.log(reports);
-  const l = reports.length;
-  res.send(reports[l-1]);
+  const report = await DoshaReportModel.find({member_id:member_id})
+  console.log(report);
+  const l = report.length;
+  res.send(report[l-1]);
  // res.status(200).send(ques);
 });
+
+// FETCHING ALL THE DOSHA REPORTS OF THE PARTICULAR USERS
+
+app.post("/DoshaReports", async(req,res) => {
+
+  const  {member_id } = req.body;
+  const reports = await DoshaReportModel.find({member_id : member_id})
+  res.send(reports);
+
+})
+
+// GET FEATURE TO CHECK THE LATEST 
 
 app.get("/Dosha", async(req, res) => {
   const { member_id } = req.body;
@@ -150,7 +164,6 @@ app.get("/Dosha", async(req, res) => {
   console.log(reports);
   const l = reports.length;
   res.send(reports[l-1]);
- // res.status(200).send(ques);
 });
 
 
@@ -175,7 +188,6 @@ app.post("/Remedies", async (req, res) => {
           res.send(remedy);
         })
         
-
 
 //REMINDERS
 setInterval(() => {
@@ -244,5 +256,31 @@ app.post("/deleteReminder", (req, res) => {
     });
   })
 })
+
+//FEEDBACKS
+
+// Feedbacks written by the user
+
+app.post("/UserFeedbacks", (req,res) => {
+
+  const{member_id,feedback} = req.body;
+  const feedbacks = new FeedbacksModel({
+    member_id,
+    feedback,
+  });
+
+  feedbacks.save();
+  res.send(feedbacks);
+})
+
+// Feedbacks displayed on the doctor panel side
+
+app.post("/DoctorFeedbacks", async (req,res) => {
+  const feedbacks = await FeedbacksModel.find()
+  res.status(200).send(feedbacks);
+})
+
+
+
 
 app.listen(5000, () => console.log("Backend is running"));
