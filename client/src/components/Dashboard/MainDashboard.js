@@ -6,11 +6,33 @@ import { FaFirefox } from "react-icons/fa";
 import { TbAwardFilled } from "react-icons/tb";
 import axios from 'axios';
 
-const MainDashboard = () => {
-    const [record, setRecord] = useState([])
-    const id = useLocation();
+const MainDashboard = ({mem_id}) => {
+    const [record, setRecord] = useState([]);
+    const [vata, setVata] = useState();
+    const [pitta, setPitta] = useState();
+    const [kapha, setKapha] = useState();
+
+    // const member_id = useLocation();
+    console.log(mem_id);
 
 
+   try {
+    axios.post('http://localhost:5000/latestDoshaScore').then((dosha) => 
+    {
+        console.log(dosha.data.vatta);
+        console.log(dosha.data.pitta);
+        console.log(dosha.data.kapha);
+        setVata(dosha.data.vatta);
+        setPitta(dosha.data.pitta);
+        setKapha(dosha.data.kapha);
+
+    }).catch(err => {
+        console.log(err);
+    })
+    }
+    catch (error) {
+    console.error(error);
+    }
     try {
         axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
             let idx = 3;
@@ -22,17 +44,7 @@ const MainDashboard = () => {
     catch (error) {
         console.error(error);
     }
-    try {
-        const response = axios.post('http://localhost:5000/latestDoshaScore').then((data) => 
-        {
-            
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-    catch (error) {
-        console.error(error);
-    }
+  
 
     return (
         <div className="col main pt-5 mt-3">
@@ -63,7 +75,7 @@ const MainDashboard = () => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Kapha</h6>
-                            <h1 className="display-4">6<span>/10</span></h1>
+                            <h1 className="display-4">{kapha}<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -75,7 +87,7 @@ const MainDashboard = () => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Pitta</h6>
-                            <h1 className="display-4">5<span>/10</span></h1>
+                            <h1 className="display-4">{pitta}<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -87,7 +99,7 @@ const MainDashboard = () => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Vata</h6>
-                            <h1 className="display-4">9<span>/10</span></h1>
+                            <h3 className="display-4">{vata}<span>/10</span></h3>
                         </div>
                     </div>
                 </div>

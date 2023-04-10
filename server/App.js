@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-// SIGNU-UP FORM
+// SIGN-UP FORM
 app.post("/users", async (req, res) => {
   const { name, age, gender, email,phone, password } = req.body;
   UserModel.findOne({ email: email }).then((users) => {
@@ -135,7 +135,7 @@ app.post("/doshareport", (req, res) => {
 
 
 // FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
-app.get("/latestDoshaScore", async(req, res) => {
+app.post("/latestDoshaScore", async(req, res) => {
   //const { member_id } = req.body;
   const member_id = "641df0dcf6fa41af073446c8";
   const reports = await DoshaReportModel.find({member_id:member_id})

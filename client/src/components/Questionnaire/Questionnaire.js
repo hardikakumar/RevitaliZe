@@ -51,7 +51,7 @@ const Questionnaire = () => {
     
       axios.post('http://localhost:5000/doshareport', {vatta, pitta, kapha, member_id, date});
     {
-      navigate('/dashboard', { state: { name: "Hardika" } })
+      navigate('/dashboard', { state: { member_id: member_id } })
     }
     } catch (error) 
     {

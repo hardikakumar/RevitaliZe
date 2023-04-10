@@ -6,8 +6,8 @@ import Sidebar from './SideBar';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Dashboard() {
-    // const name = useLocation();
-    // console.log(name.state.name+" dashboard")
+    const id = useLocation();
+    console.log(id.state.member_id);
     return (
         <div>
             <Navbar />
@@ -15,7 +15,7 @@ function Dashboard() {
                 <div class="row row-offcanvas row-offcanvas-left">
                     {/* <Sidebar name={name.state.name} /> */}
                     <Sidebar />
-                    <MainDashboard />
+                    <MainDashboard mem_id = {id.state.member_id}/>
                 
                 </div>
             </div>

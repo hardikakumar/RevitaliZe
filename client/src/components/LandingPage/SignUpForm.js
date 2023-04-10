@@ -88,10 +88,14 @@ function SignUpForm() {
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         try {
             if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password) && isValidPhone(phone)) {
                 const response = await axios.post('http://localhost:5000/users', { name, age, gender, email,phone, password });
-                navigate('/questionnaire');
+                const id = response.data._id;
+                console.log(response);
+                alert('Sign-Up successfull');
+                navigate('/questionnaire',{state : {id:id}});
             }
             else alert('Please enter correct details');
         }
