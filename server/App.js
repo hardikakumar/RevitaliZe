@@ -136,8 +136,16 @@ app.post("/doshareport", (req, res) => {
 
 // FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
 app.post("/latestDoshaScore", async(req, res) => {
-  //const { member_id } = req.body;
-  const member_id = "641df0dcf6fa41af073446c8";
+  const { member_id } = req.body;
+  const reports = await DoshaReportModel.find({member_id:member_id})
+  console.log(reports);
+  const l = reports.length;
+  res.send(reports[l-1]);
+ // res.status(200).send(ques);
+});
+
+app.get("/Dosha", async(req, res) => {
+  const { member_id } = req.body;
   const reports = await DoshaReportModel.find({member_id:member_id})
   console.log(reports);
   const l = reports.length;

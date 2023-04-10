@@ -12,16 +12,13 @@ const MainDashboard = ({mem_id}) => {
     const [pitta, setPitta] = useState();
     const [kapha, setKapha] = useState();
 
-    // const member_id = useLocation();
     console.log(mem_id);
-
+    const member_id = mem_id;
 
    try {
-    axios.post('http://localhost:5000/latestDoshaScore').then((dosha) => 
+    axios.post('http://localhost:5000/latestDoshaScore',{member_id}).then((dosha) => 
     {
-        console.log(dosha.data.vatta);
-        console.log(dosha.data.pitta);
-        console.log(dosha.data.kapha);
+        console.log(dosha.data.vatta)
         setVata(dosha.data.vatta);
         setPitta(dosha.data.pitta);
         setKapha(dosha.data.kapha);

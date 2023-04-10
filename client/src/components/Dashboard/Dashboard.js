@@ -14,7 +14,7 @@ function Dashboard() {
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     {/* <Sidebar name={name.state.name} /> */}
-                    <Sidebar />
+                    <Sidebar member_id = {id.state.member_id}/>
                     <MainDashboard mem_id = {id.state.member_id}/>
                 
                 </div>

@@ -20,8 +20,6 @@ const Questionnaire = () => {
   var [vatta, setVatta] = useState(0);
   var [pitta, setPitta] = useState(0);
   var [kapha, setKapha] = useState(0);
- 
-  
 
   try 
   {
@@ -59,8 +57,6 @@ const Questionnaire = () => {
     }
   }
   
-
-
 
   const handleAnswerResponse = (pos) => {
     var addScore;
@@ -131,27 +127,6 @@ const Questionnaire = () => {
                       x={sliderPos.x}
                       onChange={({ x }) => setSlider({ x: parseFloat(x.toFixed(2)) })}
                     />
-
-                    {/* <MDBContainer className="d-flex justify-content-center">
-                      <div className="mx-0 mx-sm-auto">
-                        <p className="fw-bold text-center">
-                          {questions[0][currentQues].ques}
-                        </p>
-
-                        <MDBBtnGroup aria-label="Basic example" className="me-2">
-                          <MDBBtn color="light">0</MDBBtn>
-                          <MDBBtn color="light">2</MDBBtn>
-                          <MDBBtn color="light">3</MDBBtn>
-                          <MDBBtn color="light">4</MDBBtn>
-                          <MDBBtn color="light">5</MDBBtn>
-                          <MDBBtn color="light">6</MDBBtn>
-                          <MDBBtn color="light">7</MDBBtn>
-                          <MDBBtn color="light">8</MDBBtn>
-                          <MDBBtn color="light">9</MDBBtn>
-                          <MDBBtn color="light" onClick={null}>10</MDBBtn>
-                        </MDBBtnGroup>
-                      </div>
-                    </MDBContainer> */}
 
                     <br />
                     <Button onClick={() => handleAnswerResponse(sliderPos.x)} variant='light'>Next</Button>
