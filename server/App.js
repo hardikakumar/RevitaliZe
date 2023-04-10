@@ -149,7 +149,7 @@ app.get("/latestDoshaScore", async(req, res) => {
 // REMEDIES
 
 app.post("/Remedies", async (req, res) => {
-  const { RemedyName, Description , Eczema, Hyperthyroidism, Hypothyroidism, PCOD } = req.body;
+  const { RemedyName, Description , Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha } = req.body;
   
           const remedy = new RemediesModel({
             RemedyName,
@@ -158,6 +158,8 @@ app.post("/Remedies", async (req, res) => {
             Hyperthyroidism,
             Hypothyroidism,
             PCOD,
+            Type,
+            Dosha
           });
         
           remedy.save();

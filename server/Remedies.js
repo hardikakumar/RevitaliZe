@@ -11,18 +11,26 @@ const RemedySchema = new Schema({
         length: 100
     },
     Eczema: {
-        type: String,
+        type: Boolean,
         length: 10
     },
     Hyperthyroidism: {
-        type: String,
+        type: Boolean,
         length: 10
     },
     Hypothyroidism: {
-        type: String,
+        type: Boolean,
         length: 10
     },
     PCOD: {
+        type: Boolean,
+        length: 10
+    },
+    Type: {
+        type: String,
+        length: 10
+    },
+    Dosha: {
         type: String,
         length: 10
     }

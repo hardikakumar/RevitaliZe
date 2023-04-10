@@ -23,7 +23,7 @@ const MainDashboard = () => {
         console.error(error);
     }
     try {
-        const response = axios.post('http://localhost:5000/latestDoshaScore',{member_id}).then((data) => 
+        const response = axios.post('http://localhost:5000/latestDoshaScore').then((data) => 
         {
             
         }).catch(err => {

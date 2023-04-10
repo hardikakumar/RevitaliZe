@@ -10,21 +10,23 @@ import Checkbox from '@mui/material/Checkbox';
 import './Remedies.css'
 
 const Remedies = () => {
-    const [rem, setRem] = useState();
-    const [desc, setDesc] = useState();
-    const [eczema, setEczema] = useState();
-    const [hyper, setHyper] = useState();
-    const [hypo, setHypo] = useState();
-    const [pcod, setPcod] = useState();
-    const [remType, setRemType] = useState();
-    const [remDosha, setRemDosha] = useState();
+    const [RemedyName, setRem] = useState();
+    const [Description, setDesc] = useState();
+    const [Eczema, setEczema] = useState(false);
+    const [Hyperthyroidism, setHyper] = useState(false);
+    const [Hypothyroidism, setHypo] = useState(false);
+    const [PCOD, setPcod] = useState(false);
+    const [Type, setRemType] = useState();
+    const [Dosha, setRemDosha] = useState();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            axios.post('http://localhost:5000/Remedies', {RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD}).then((data) => {
+            axios.post('http://localhost:5000/Remedies', {RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha}).then((data) => {
                  alert('Credentials successfully posted');
             })
+            setRem("");
+            setDesc("");
         }
         catch(error){
             console.error(error)
@@ -49,7 +51,8 @@ const Remedies = () => {
                                         <div>
                                             <TextField
                                                 fullWidth
-                                                label="Remedy"
+                                                id="rem_name"
+                                                label="Remedy Name"
                                                 sx={{ width: 700 }}
                                                 value={RemedyName}
                                                 onChange={e => setRem(e.target.value)}
@@ -64,80 +67,51 @@ const Remedies = () => {
                                                 multiline
                                                 rows={3}
                                                 sx={{ width: 700 }}
-                                                label="Description"
+                                                label="Remedy Description"
                                                 value={Description}
                                                 onChange={e => setDesc(e.target.value)}
                                             />
                                         </div>
                                     </FormGroup>
 
-<<<<<<< HEAD
-                                    
-=======
->>>>>>> origin/hardika
 
                                     <FormGroup row>
                                         <div className='checkbox-design1'>
                                             <FormControlLabel control={
                                                 <Checkbox
-                                                    value={eczema}
+                                                    value={Eczema}
                                                     onChange={e => setEczema(e.target.checked)}
                                                 />}
                                                 label="Eczema"
-<<<<<<< HEAD
-                                                value={Eczema}
-                                                onChange={e => setEczema(e.target.value)}
-                                            >
-                                                <MenuItem key={'T'} value={true}>True</MenuItem>
-                                                <MenuItem key={'F'} value={false}>False</MenuItem>
-                                            </TextField>
-                                        </div>
-                                    </FormGroup>
-=======
                                             />
->>>>>>> origin/hardika
 
                                             <FormControlLabel control={
                                                 <Checkbox
-                                                    value={hyper}
+                                                    value={Hyperthyroidism}
                                                     onChange={e => setHyper(e.target.checked)}
                                                 />}
                                                 label="Hyperthyroidism"
-<<<<<<< HEAD
-                                                value={Hyperthyroidism}
-                                                onChange={e => setHyper(e.target.value)}
-                                            >
-                                                <MenuItem key={'T'} value={true}>True</MenuItem>
-                                                <MenuItem key={'F'} value={false}>False</MenuItem>
-                                            </TextField>
-=======
                                             />
->>>>>>> origin/hardika
                                         </div>
 
                                         <div className='checkbox-design2'>
                                             <FormControlLabel control={
                                                 <Checkbox
-                                                    value={hypo}
+                                                    value={Hypothyroidism}
                                                     onChange={e => setHypo(e.target.checked)}
                                                 />}
                                                 label="Hypothyroidism"
-<<<<<<< HEAD
-                                                value={Hypothyroidism}
-                                                onChange={e => setHypo(e.target.value)}
-=======
                                             />
 
                                             <FormControlLabel control={
                                                 <Checkbox
-                                                    value={pcod}
+                                                    value={PCOD}
                                                     onChange={e => setPcod(e.target.checked)}
                                                 />}
                                                 label="PCOD"
                                             />
                                         </div>
                                     </FormGroup>
-
 
                                     <FormGroup row>
                                         <div>
@@ -146,9 +120,8 @@ const Remedies = () => {
                                                 select
                                                 fullWidth
                                                 label="Remedy Type"
-                                                value={remType}
+                                                value={Type}
                                                 onChange={e => setRemType(e.target.value)}
->>>>>>> origin/hardika
                                             >
                                                 <MenuItem key={'f'} value={'f'}>Fruits</MenuItem>
                                                 <MenuItem key={'v'} value={'v'}>Vegetables</MenuItem>
@@ -170,15 +143,9 @@ const Remedies = () => {
                                                 id="outlined-select-dosha"
                                                 select
                                                 fullWidth
-<<<<<<< HEAD
-                                                label="PCOD"
-                                                value={PCOD}
-                                                onChange={e => setPcod(e.target.value)}
-=======
                                                 label="Remedy Dosha"
-                                                value={remDosha}
+                                                value={Dosha}
                                                 onChange={e => setRemDosha(e.target.value)}
->>>>>>> origin/hardika
                                             >
                                                 <MenuItem key={'v'} value={'v'}>Vata</MenuItem>
                                                 <MenuItem key={'p'} value={'p'}>Pitta</MenuItem>
