@@ -19,6 +19,10 @@ function LoginForm() {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     }
 
+    const isDoctorEmail = (email) => {
+        return /^[\w.+\-]+@revitalize\.com$/.test(email);
+    }
+
     const handlePasswordChange = (event) => {
         setPassword(event.target.value)
     };
@@ -39,7 +43,8 @@ function LoginForm() {
             const id = response.data._id;
             console.log(id);
             alert('Login successfull');
-            navigate('/questionnaire',{state : {id:id}});
+            if(isDoctorEmail(email)) navigate('/doctor-dashboard',{state : {id:id}});
+            else navigate('/dashboard',{state : {id:id}});
         }
         catch (error) {
             console.error(error);

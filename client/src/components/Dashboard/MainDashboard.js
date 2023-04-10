@@ -1,9 +1,10 @@
-import { useEffect, useState,useLocation} from 'react';
+import { useEffect, useState, useLocation } from 'react';
 import './MainDashboard.css';
 import { FaFire } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa";
 import { FaFirefox } from "react-icons/fa";
 import { TbAwardFilled } from "react-icons/tb";
+import Reminder from '../Reminders/Reminders'
 import axios from 'axios';
 
 const MainDashboard = ({mem_id}) => {
@@ -61,6 +62,7 @@ const MainDashboard = ({mem_id}) => {
                 </button>
                 <strong>Data and Records</strong> Learn more about employee
             </div> */}
+            
             <p></p>
             <div className="row mb-3">
                 <div className="col-xl-3 col-sm-6 py-2">

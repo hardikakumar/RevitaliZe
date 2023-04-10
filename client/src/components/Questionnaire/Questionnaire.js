@@ -5,7 +5,6 @@ import './Questionnaire.css';
 import axios from 'axios';
 import Slider from 'react-input-slider';
 import { Button } from 'react-bootstrap';
-import { MDBBtn, MDBBtnGroup, MDBContainer } from "mdb-react-ui-kit";
 
 const Questionnaire = () => {
   const id = useLocation();
@@ -21,18 +20,15 @@ const Questionnaire = () => {
   var [pitta, setPitta] = useState(0);
   var [kapha, setKapha] = useState(0);
 
-  try 
-  {
-    axios.post('http://localhost:5000/questionnaire').then((data) =>
-    {
+  try {
+    axios.post('http://localhost:5000/questionnaire').then((data) => {
       questions.push(data.data);
     }).catch(err => {
       console.log(err);
     })
   }
 
-  catch (error) 
-  {
+  catch (error) {
     console.error(error);
   }
 
@@ -80,9 +76,6 @@ const Questionnaire = () => {
         setKapha(temp);
     }
 
-    console.log('vatta: ' + vatta);
-    console.log('pitta: ' + pitta);
-    console.log('kapha: ' + kapha);
     const nextQues = currentQues + 1;
     if (nextQues < questions[0].length) setCurrentQues(nextQues);
     else handleSubmit();
