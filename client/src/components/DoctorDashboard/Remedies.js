@@ -7,37 +7,25 @@ import axios from 'axios';
 import './DoctorDashboard.css'
 
 const Remedies = () => {
-    const [rem, setRem] = useState();
-    const [desc, setDesc] = useState();
-    const [eczema, setEczema] = useState();
-    const [hyper, setHyper] = useState();
-    const [hypo, setHypo] = useState();
-    const [pcod, setPcod] = useState();
-
-    console.log(rem)
-    console.log(desc)
-    console.log(eczema)
-    console.log(hyper)
+    const [RemedyName, setRem] = useState();
+    const [Description, setDesc] = useState();
+    //const [Type, setType] = useState();
+    const [Eczema, setEczema] = useState();
+    const [Hyperthyroidism, setHyper] = useState();
+    const [Hypothyroidism, setHypo] = useState();
+    const [PCOD, setPcod] = useState();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        // try {
-        //     if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password) && isValidPhone(phone)) {
-        //         const response = await axios.post('http://localhost:5000/users', { name, age, gender, email,phone, password });
-        //         navigate('/questionnaire');
-        //     }
-        //     else alert('Please enter correct details');
-        // }
-        // catch (error) {
-        //     console.error(error);
-        //     console.log(error);
-        //     if (error.response.status == 403) {
-        //         alert(error.response.data.message);
-        //     }
-        //     else {
-        //         alert('Signup failed');
-        //     }
-        // }
+        try {
+            axios.post('http://localhost:5000/Remedies', {RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD}).then((data) => {
+                 alert('Credentials successfully posted');
+            })
+        }
+        catch(error){
+            console.error(error)
+    
+        }
     };
 
 
@@ -59,7 +47,7 @@ const Remedies = () => {
                                                 fullWidth
                                                 label="Remedy"
                                                 sx={{ width: 700 }}
-                                                value={rem}
+                                                value={RemedyName}
                                                 onChange={e => setRem(e.target.value)}
                                             />
                                         </div>
@@ -73,11 +61,13 @@ const Remedies = () => {
                                                 rows={2}
                                                 sx={{ width: 700 }}
                                                 label="Description"
-                                                value={desc}
+                                                value={Description}
                                                 onChange={e => setDesc(e.target.value)}
                                             />
                                         </div>
                                     </FormGroup>
+
+                                    
 
                                     <FormGroup row>
                                         <div>
@@ -86,7 +76,7 @@ const Remedies = () => {
                                                 select
                                                 fullWidth
                                                 label="Eczema"
-                                                value={eczema}
+                                                value={Eczema}
                                                 onChange={e => setEczema(e.target.value)}
                                             >
                                                 <MenuItem key={'T'} value={true}>True</MenuItem>
@@ -102,7 +92,7 @@ const Remedies = () => {
                                                 select
                                                 fullWidth
                                                 label="Hyperthyroidism"
-                                                value={hyper}
+                                                value={Hyperthyroidism}
                                                 onChange={e => setHyper(e.target.value)}
                                             >
                                                 <MenuItem key={'T'} value={true}>True</MenuItem>
@@ -118,7 +108,7 @@ const Remedies = () => {
                                                 select
                                                 fullWidth
                                                 label="Hypothyroidism"
-                                                value={hypo}
+                                                value={Hypothyroidism}
                                                 onChange={e => setHypo(e.target.value)}
                                             >
                                                 <MenuItem key={'T'} value={true}>True</MenuItem>
@@ -134,7 +124,7 @@ const Remedies = () => {
                                                 select
                                                 fullWidth
                                                 label="PCOD"
-                                                value={pcod}
+                                                value={PCOD}
                                                 onChange={e => setPcod(e.target.value)}
                                             >
                                                 <MenuItem key={'T'} value={true}>True</MenuItem>

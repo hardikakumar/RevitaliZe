@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useLocation} from 'react';
 import './MainDashboard.css';
 import { FaFire } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa";
@@ -8,6 +8,8 @@ import axios from 'axios';
 
 const MainDashboard = () => {
     const [record, setRecord] = useState([])
+    const id = useLocation();
+
 
     try {
         axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
@@ -20,7 +22,17 @@ const MainDashboard = () => {
     catch (error) {
         console.error(error);
     }
-
+    try {
+        const response = axios.post('http://localhost:5000/latestDoshaScore',{member_id}).then((data) => 
+        {
+            
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    catch (error) {
+        console.error(error);
+    }
 
     return (
         <div className="col main pt-5 mt-3">

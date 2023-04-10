@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const DoshaReportSchema = new Schema({
-    dosha_id: {
-        type: String,
-        length:10
-    },
+    // dosha_id: {
+    //     type: String,
+    //     length:10
+    // },
     member_id: {
         type: String,
         length: 100

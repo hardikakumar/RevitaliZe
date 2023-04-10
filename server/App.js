@@ -12,9 +12,9 @@ const DB =
 const UserModel = require("./User.js");
 const QuesModel = require("./Ques.js");
 const DoshaReportModel = require("./DoshaReport.js");
-const HealthTipsModel = require("./HealthTips.js");
+const RemediesModel = require("./Remedies.js");
 const ReminderModel = require("./Reminder.js");
-
+const HealthTipsModel = require("./HealthTips.js");
 
 mongoose
   .connect(DB)
@@ -133,14 +133,38 @@ app.post("/doshareport", (req, res) => {
   console.log(doshareport);
 });
 
-// FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
 
-app.get("/DoshaReportRecords", async(req, res) => {
-  const { member_id } = req.body;
+// FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
+app.get("/latestDoshaScore", async(req, res) => {
+  //const { member_id } = req.body;
+  const member_id = "641df0dcf6fa41af073446c8";
   const reports = await DoshaReportModel.find({member_id:member_id})
   console.log(reports);
+  const l = reports.length;
+  res.send(reports[l-1]);
  // res.status(200).send(ques);
 });
+
+
+// REMEDIES
+
+app.post("/Remedies", async (req, res) => {
+  const { RemedyName, Description , Eczema, Hyperthyroidism, Hypothyroidism, PCOD } = req.body;
+  
+          const remedy = new RemediesModel({
+            RemedyName,
+            Description,
+            Eczema,
+            Hyperthyroidism,
+            Hypothyroidism,
+            PCOD,
+          });
+        
+          remedy.save();
+          console.log("Remedy object:", remedy);
+          res.send(remedy);
+        })
+        
 
 
 //REMINDERS

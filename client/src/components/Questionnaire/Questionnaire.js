@@ -32,7 +32,9 @@ const Questionnaire = () => {
       console.log(err);
     })
   }
-  catch (error) {
+
+  catch (error) 
+  {
     console.error(error);
   }
 
@@ -46,9 +48,6 @@ const Questionnaire = () => {
       vatta = Math.round((vatta + Number.EPSILON) * 100) / 100
       pitta = Math.round((pitta + Number.EPSILON) * 100) / 100
       kapha = Math.round((kapha + Number.EPSILON) * 100) / 100
-      // var v = 5;
-      // var p = 23;
-      // var k = 234;
     
       axios.post('http://localhost:5000/doshareport', {vatta, pitta, kapha, member_id, date});
     {
@@ -59,7 +58,8 @@ const Questionnaire = () => {
       console.error(error);
     }
   }
-      
+  
+
 
 
   const handleAnswerResponse = (pos) => {
