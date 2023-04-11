@@ -74,7 +74,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Kapha</h6>
-                            <h1 className="display-4">{kapha}<span>/10</span></h1>
+                            <h1 className="display-4">4<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Pitta</h6>
-                            <h1 className="display-4">{pitta}<span>/10</span></h1>
+                            <h1 className="display-4">8<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Vata</h6>
-                            <h3 className="display-4">{vata}<span>/10</span></h3>
+                            <h3 className="display-4">7.5<span>/10</span></h3>
                         </div>
                     </div>
                 </div>
