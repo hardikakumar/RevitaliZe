@@ -7,15 +7,15 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 function Dashboard() {
     const id = useLocation();
-    console.log(id.state.member_id);
+
     return (
         <div>
             <Navbar />
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     {/* <Sidebar name={name.state.name} /> */}
-                    <Sidebar member_id = {id.state.member_id}/>
-                    <MainDashboard mem_id = {id.state.member_id}/>
+                    <Sidebar member_id = {id.state.id}/>
+                    <MainDashboard member_id = {id.state.id}/>
                 
                 </div>
             </div>

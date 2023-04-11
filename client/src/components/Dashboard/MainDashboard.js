@@ -7,14 +7,11 @@ import { TbAwardFilled } from "react-icons/tb";
 import Reminder from '../Reminders/Reminders'
 import axios from 'axios';
 
-const MainDashboard = ({mem_id}) => {
+const MainDashboard = ({member_id}) => {
     const [record, setRecord] = useState([]);
     const [vata, setVata] = useState();
     const [pitta, setPitta] = useState();
     const [kapha, setKapha] = useState();
-
-    console.log(mem_id);
-    const member_id = mem_id;
 
    try {
     axios.post('http://localhost:5000/latestDoshaScore',{member_id}).then((dosha) => 
@@ -74,7 +71,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Kapha</h6>
-                            <h1 className="display-4">4<span>/10</span></h1>
+                            <h1 className="display-4">{kapha}<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -86,7 +83,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Pitta</h6>
-                            <h1 className="display-4">8<span>/10</span></h1>
+                            <h1 className="display-4">{pitta}<span>/10</span></h1>
                         </div>
                     </div>
                 </div>
@@ -98,7 +95,7 @@ const MainDashboard = ({mem_id}) => {
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Vata</h6>
-                            <h3 className="display-4">7.5<span>/10</span></h3>
+                            <h3 className="display-4">{vata}<span>/10</span></h3>
                         </div>
                     </div>
                 </div>
