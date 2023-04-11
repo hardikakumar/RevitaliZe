@@ -15,6 +15,7 @@ const DoshaReportModel = require("./DoshaReport.js");
 const RemediesModel = require("./Remedies.js");
 const ReminderModel = require("./Reminder.js");
 const HealthTipsModel = require("./HealthTips.js");
+const FeedbacksModel = require("./Feedback.js");
 
 mongoose
   .connect(DB)
@@ -128,19 +129,30 @@ app.post("/doshareport", (req, res) => {
 });
 
 
-// FETCH ALL THE PAST DOSHA REPORTS OF THE PARTICULAR USER
+// FETCHING THE LATEST DOSHA REPORT OF THE PARTICULAR USER
+
 app.post("/latestDoshaScore", async (req, res) => {
   const { member_id } = req.body;
-  const reports = await DoshaReportModel.find({ member_id: member_id })
-  console.log(reports);
-  const l = reports.length;
-  res.send(reports[l - 1]);
+  const report = await DoshaReportModel.find({ member_id: member_id })
+  console.log(report);
+  const l = report.length;
+  res.send(report[l - 1]);
   // res.status(200).send(ques);
 });
 
 // FETCHING ALL THE DOSHA REPORTS OF THE PARTICULAR USERS
+
 app.post("/DoshaReports", async (req, res) => {
 
+  const { member_id } = req.body;
+  const reports = await DoshaReportModel.find({ member_id: member_id })
+  res.send(reports);
+
+})
+
+// GET FEATURE TO CHECK THE LATEST 
+
+app.get("/Dosha", async (req, res) => {
   const { member_id } = req.body;
   const reports = await DoshaReportModel.find({ member_id: member_id })
   res.send(reports);
@@ -177,7 +189,6 @@ app.post("/Remedies", async (req, res) => {
   console.log("Remedy object:", remedy);
   res.send(remedy);
 })
-
 
 
 //REMINDERS
@@ -249,7 +260,9 @@ app.post("/deleteReminder", (req, res) => {
 })
 
 //FEEDBACKS
+
 // Feedbacks written by the user
+
 app.post("/UserFeedbacks", (req, res) => {
 
   const { member_id, feedback } = req.body;
