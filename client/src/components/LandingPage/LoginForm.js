@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Col, FormGroup } from 'reactstrap';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { TextField, FormControl, IconButton, InputAdornment, OutlinedInput, InputLabel, MenuItem } from "@mui/material";
+import { TextField, FormControl, IconButton, InputAdornment, OutlinedInput, InputLabel } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -35,16 +35,15 @@ function LoginForm() {
 
         // const formData = {email, password}
 
-        try
-        {
-            const response = await axios.post('http://localhost:5000/userLogin', {email, password});
+        try {
+            const response = await axios.post('http://localhost:5000/userLogin', { email, password });
             console.log(response);
             const name = response.data.name;
             const id = response.data._id;
             console.log(id);
             alert('Login successfull');
-            if(isDoctorEmail(email)) navigate('/doctor-dashboard',{state : {id:id}});
-            else navigate('/dashboard',{state : {id:id}});
+            if (isDoctorEmail(email)) navigate('/doctor-dashboard', { state: { id: id, name: name } });
+            else navigate('/dashboard', { state: { id: id, name: name } });
         }
         catch (error) {
             console.error(error);
@@ -52,6 +51,7 @@ function LoginForm() {
 
         }
     };
+
     return (
         <div>
             <Form>

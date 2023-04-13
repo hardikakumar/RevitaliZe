@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const ReminderSchema = new Schema({
-    member_id: {
-       type: String
-    },
     reminderMsg: {
         type: String
     },

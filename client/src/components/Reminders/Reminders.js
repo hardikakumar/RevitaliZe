@@ -6,12 +6,16 @@ import { Form, FormGroup } from 'reactstrap';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateTimePicker } from '@mui/x-date-pickers';
+import { useLocation } from 'react-router-dom';
 
 function Reminders() {
+    let id = useLocation();
+
     const [reminderMsg, setReminderMsg] = useState("")
     const [remindAt, setRemindAt] = useState()
     const [reminderList, setReminderList] = useState([])
     const [reminderFreq, setReminderFreq] = useState()
+
 
     useEffect(() => {
         axios.get("http://localhost:5000/getAllReminder").then(res => setReminderList(res.data))
@@ -30,11 +34,6 @@ function Reminders() {
         axios.post("http://localhost:5000/deleteReminder", { id })
             .then(res => setReminderList(res.data))
     }
-
-    // const dd = new Date('2022-05-15T12:00:00.000Z');
-    // console.log(dd);
-    // dd.setHours(dd.getHours() + 24);
-    // console.log(dd);
 
 
     return (
@@ -55,21 +54,6 @@ function Reminders() {
                                 />
                             </div>
                         </FormGroup>
-
-                        {/* <FormGroup row>
-                            <div>
-                                <DateTimePicker
-                                    value={remindAt}
-                                    onChange={setRemindAt}
-                                    minDate={new Date()}
-                                    minutePlaceholder="mm"
-                                    hourPlaceholder="hh"
-                                    dayPlaceholder="DD"
-                                    monthPlaceholder="MM"
-                                    yearPlaceholder="YYYY"
-                                />
-                            </div>
-                        </FormGroup> */}
 
                         <FormGroup row>
                             <div>
@@ -103,9 +87,6 @@ function Reminders() {
                             </LocalizationProvider>
                         </div>
                     </FormGroup>
-
-
-                    {/* <input type="text" placeholder="Reminder notes here..." value={reminderMsg} onChange={e => setReminderMsg(e.target.value)} /> */}
 
                     <div className="button" onClick={addReminder}>Add Reminder</div>
                 </div>

@@ -16,7 +16,7 @@ function SignUpForm() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-// -----------NAME-----------
+    // -----------NAME-----------
     const handleNameChange = (event) => {
         setName(event.target.value)
     };
@@ -25,7 +25,7 @@ function SignUpForm() {
         return /^[a-zA-Z ]{2,30}$/.test(name);
     }
 
-// -----------AGE-----------
+    // -----------AGE-----------
     const handleAgeChange = (event) => {
         setAge(event.target.value)
     };
@@ -34,12 +34,12 @@ function SignUpForm() {
         return age >= 10 && age <= 99;
     }
 
-// -----------GENDER-----------
+    // -----------GENDER-----------
     const handleGenderChange = (event) => {
         setGender(event.target.value)
     };
 
-// -----------EMAIL-----------    
+    // -----------EMAIL-----------    
     const handleEmailChange = (event) => {
         setEmail(event.target.value)
     };
@@ -48,7 +48,7 @@ function SignUpForm() {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     }
 
-// -----------PHONE-----------    
+    // -----------PHONE-----------    
     const handlePhoneChange = (event) => {
         setPhone(event.target.value);
         console.log(phone)
@@ -56,7 +56,7 @@ function SignUpForm() {
     };
 
     const isValidPhone = (phone) => {
-        return phone.length==14;
+        return phone.length == 14;
     }
 
     const formatPhoneNumber = (value) => {
@@ -70,10 +70,10 @@ function SignUpForm() {
         return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
             3,
             6,
-        )}-${phoneNumber.slice(6, )}`;
+        )}-${phoneNumber.slice(6,)}`;
     }
 
-// -----------PASSWORD-----------    
+    // -----------PASSWORD-----------    
     const handlePasswordChange = (event) => {
         setPassword(event.target.value)
     };
@@ -84,18 +84,20 @@ function SignUpForm() {
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-// -----------SUBMIT-----------    
+    // -----------SUBMIT-----------    
     const navigate = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
             if (isValidName(name) && isValidAge(age) && isValidEmail(email) && isValidPassword(password) && isValidPhone(phone)) {
-                const response = await axios.post('http://localhost:5000/users', { name, age, gender, email,phone, password });
+                const response = await axios.post('http://localhost:5000/users', { name, age, gender, email, phone, password });
                 const id = response.data._id;
-                console.log(response);
+                console.log(response.data);
+                // const name = response.data.name;
+                
                 alert('Sign-Up successfull');
-                navigate('/questionnaire',{state : {id:id}});
+                navigate('/questionnaire', { state: { id: id, name: name } });
             }
             else alert('Please enter correct details');
         }
@@ -203,7 +205,7 @@ function SignUpForm() {
                                 variant="outlined"
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start">+91</InputAdornment>,
-                                  }}
+                                }}
                                 placeholder="Enter phone number"
                                 value={formatPhoneNumber(phone)}
                                 onChange={handlePhoneChange}

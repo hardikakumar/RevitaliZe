@@ -7,9 +7,12 @@ import axios from 'axios';
 import './DoctorDashboard.css'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import bgImage from './bgImage.png';
+import { useLocation } from 'react-router-dom';
 import './Remedies.css'
 
 const Remedies = () => {
+    let id = useLocation();
     const [RemedyName, setRem] = useState();
     const [Description, setDesc] = useState();
     const [Eczema, setEczema] = useState(false);
@@ -22,18 +25,17 @@ const Remedies = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            axios.post('http://localhost:5000/Remedies', {RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha}).then((data) => {
-                 alert('Credentials successfully posted');
+            axios.post('http://localhost:5000/Remedies', { RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha }).then((data) => {
+                alert('Credentials successfully posted');
             })
             setRem("");
             setDesc("");
         }
-        catch(error){
+        catch (error) {
             console.error(error)
-    
+
         }
     };
-
 
 
     return (
@@ -41,7 +43,7 @@ const Remedies = () => {
             <Navbar />
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
-                    <Sidebar />
+                    <Sidebar member_id={id.state.id} member_name={id.state.name} />
 
                     <div className="col main pt-5 mt-3">
                         <div className="row mb-3">
@@ -129,7 +131,6 @@ const Remedies = () => {
                                                 <MenuItem key={'l'} value={'l'}>Legumes</MenuItem>
                                                 <MenuItem key={'d'} value={'d'}>Dairy</MenuItem>
                                                 <MenuItem key={'n'} value={'n'}>Nuts/Seeds</MenuItem>
-                                                <MenuItem key={'m'} value={'m'}>Meat/Eggs</MenuItem>
                                                 <MenuItem key={'o'} value={'o'}>Oils</MenuItem>
                                                 <MenuItem key={'t'} value={'t'}>Sweeteners</MenuItem>
                                                 <MenuItem key={'s'} value={'s'}>Spices</MenuItem>

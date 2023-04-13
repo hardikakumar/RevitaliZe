@@ -6,7 +6,8 @@ import Sidebar from './SideBar';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Dashboard() {
-    const id = useLocation();
+    let id = useLocation();
+    console.log("dashboard"+id.state)
 
     return (
         <div>
@@ -14,7 +15,7 @@ function Dashboard() {
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     {/* <Sidebar name={name.state.name} /> */}
-                    <Sidebar member_id = {id.state.id}/>
+                    <Sidebar member_id = {id.state.id} member_name = {id.state.name}/>
                     <MainDashboard member_id = {id.state.id}/>
                 
                 </div>

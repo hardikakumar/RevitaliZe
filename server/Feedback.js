@@ -6,7 +6,7 @@ const FeedbackSchema = new Schema({
         type: String,
         length: 100
     },
-    feedback: {
+    feedbackMsg: {
         type: String,
     },
 })

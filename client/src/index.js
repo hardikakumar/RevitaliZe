@@ -9,6 +9,7 @@ import DoctorDashboard from './components/DoctorDashboard/DoctorDashboard.js';
 import DoctorDashboardRemedies from './components/DoctorDashboard/Remedies.js';
 import Reminder from './components/Reminders/Reminders.js';
 import Remedies from './components/Remedies/Remedies.js';
+import Reports from './components/Reports/Reports.js';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
@@ -20,9 +21,10 @@ root.render(
       <Route exact path="/" element={<App />} />
       <Route path="/questionnaire" element={<Questionnaire />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
       <Route path="/reminder" element={<Reminder />} />
       <Route path="/remedies" element={<Remedies />} />
+      <Route path="/reports" element={<Reports />} />
+      <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
       <Route path="/doctor-dashboard/remedies" element={<DoctorDashboardRemedies />} />
     </Routes>
   </BrowserRouter>

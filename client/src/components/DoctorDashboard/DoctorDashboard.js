@@ -1,32 +1,20 @@
 import { useEffect, useState } from 'react';
 import { FaFire } from "react-icons/fa";
-
 import axios from 'axios';
 import Navbar from '../Dashboard/NavBar';
 import Sidebar from './SideBar';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './DoctorDashboard.css'
 
 const DoctorDashboard = () => {
-
-    // try {
-    //     axios.post('http://localhost:5000/Remedies').then((data) => {
-
-    //     }).catch(err => {
-    //         console.log(err);
-    //     })
-    // }
-    //  catch (error) {
-    //      console.error(error);
-    //  }
-   
-
+    let id = useLocation();
 
     return (
         <div>
             <Navbar />
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
-                    <Sidebar />
+                    <Sidebar member_id = {id.state.id} member_name = {id.state.name}/>
 
                     <div className="col main pt-5 mt-3">
                         <div className="row mb-3">

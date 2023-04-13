@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import './Remedies.css';
-import { FaFire } from "react-icons/fa";
 import axios from 'axios';
 import Navbar from '../Dashboard/NavBar';
 import Sidebar from '../Dashboard/SideBar';
-import MainDashboard from '../Dashboard/MainDashboard';
+import { useLocation } from 'react-router-dom';
+import './Remedies.css';
 
 const Remedies = () => {
+    let id = useLocation();
+    // const [record, setRecord] = useState([]);
 
     // try {
     //     axios.post('http://localhost:5000/Remedies').then((data) => {
@@ -25,7 +26,7 @@ const Remedies = () => {
             <Navbar />
             <div class="container-fluid" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
-                    <Sidebar />
+                    <Sidebar member_id={id.state.id} member_name={id.state.name} />
 
                     <div className="col main pt-5 mt-3">
                         <div className="row mb-3">
@@ -41,6 +42,36 @@ const Remedies = () => {
                                 </div>
                             </div>
                         </div>
+
+
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Label</th>
+                                        <th>Header</th>
+                                        <th>Column</th>
+                                        <th>Record Data</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* {record.slice(0, 5).map((output) =>
+                                        <tr>
+                                            <td>{output.id}</td>
+                                            <td>{output.name}</td>
+                                            <td>{output.email}</td>
+                                            <td>{output.username}</td>
+                                            <td>{output.website}</td>
+                                            <td></td>
+                                        </tr>
+                                    )} */}
+                                </tbody>
+                            </table>
+                        </div>
+
+
                         <button>PCOD</button>
 
 

@@ -1,55 +1,85 @@
-import { useEffect, useState, useLocation } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './MainDashboard.css';
 import { FaFire } from "react-icons/fa";
 import { FaLeaf } from "react-icons/fa";
 import { FaFirefox } from "react-icons/fa";
 import { TbAwardFilled } from "react-icons/tb";
-import Reminder from '../Reminders/Reminders'
 import axios from 'axios';
 
-const MainDashboard = ({member_id}) => {
-    const [record, setRecord] = useState([]);
+const MainDashboard = ({ member_id }) => {
     const [vata, setVata] = useState();
     const [pitta, setPitta] = useState();
     const [kapha, setKapha] = useState();
+    const [healthTips, setHealthTips] = useState([]);
 
-   try {
-    axios.post('http://localhost:5000/latestDoshaScore',{member_id}).then((dosha) => 
-    {
-        console.log(dosha.data.vatta)
-        setVata(dosha.data.vatta);
-        setPitta(dosha.data.pitta);
-        setKapha(dosha.data.kapha);
 
-    }).catch(err => {
-        console.log(err);
-    })
+    // Slideshow
+    const colors = ["#00C49F", "#FFBB28", "#0088FE", "#00C49F", "#FFBB28", "#0088FE", "#00C49F", "#FFBB28", "#0088FE", "#00C49F"];
+    const [index, setIndex] = useState(0);
+    const delay = 4200;
+    const timeoutRef = useRef(null);
+
+    function resetTimeout() {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
     }
-    catch (error) {
-    console.error(error);
-    }
-    try {
-        axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
-            let idx = 3;
-            console.log(data.data[idx].tip)
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-    catch (error) {
-        console.error(error);
-    }
-  
+
+    useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = setTimeout(
+            () => setIndex((prevIndex) =>
+                prevIndex === colors.length - 1 ? 0 : prevIndex + 1
+            ),
+            delay
+        );
+
+        return () => {
+            resetTimeout();
+        };
+    }, [index]);
+
+    useEffect(() => {
+        try {
+            axios.post('http://localhost:5000/DailyHealthTips').then((data) => {
+                setHealthTips([...data.data])
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        catch (error) {
+            console.error(error);
+        }
+
+        // return () => setHealthTips([...data.data]);
+    }, []);
+    console.log(healthTips);
+
+    useEffect(() => {
+        try {
+            axios.post('http://localhost:5000/latestDoshaScore', { member_id }).then((dosha) => {
+                setVata(dosha.data.vatta);
+                setPitta(dosha.data.pitta);
+                setKapha(dosha.data.kapha);
+
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        catch (error) {
+            console.error(error);
+        }
+    }, []);
 
     return (
-        <div className="col main pt-5 mt-3">
-            <nav aria-label="breadcrumb">
+        <div className="col main pt-5 mt-2">
+            {/* <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item"><a href="#">Home</a></li>
                     <li className="breadcrumb-item"><a href="#">Library</a></li>
                     <li className="breadcrumb-item active" aria-current="page">Data</li>
                 </ol>
-            </nav>
+            </nav> */}
             {/* <p className="lead d-none d-sm-block">Add Employee Details and Records</p>
 
             <div className="alert alert-warning fade collapse" role="alert" id="myAlert">
@@ -59,7 +89,7 @@ const MainDashboard = ({member_id}) => {
                 </button>
                 <strong>Data and Records</strong> Learn more about employee
             </div> */}
-            
+
             <p></p>
             <div className="row mb-3">
                 <div className="col-xl-3 col-sm-6 py-2">
@@ -115,12 +145,15 @@ const MainDashboard = ({member_id}) => {
 
             <hr />
 
-
-            <div class="row ">
+            <h5 class="mt-3 mb-3 text-secondary">
+                Did you know?
+            </h5>
+            {/* <div class="row ">
                 <div class="col-lg-7 col-md-6 col-sm-12">
                     <h5 class="mt-3 mb-3 text-secondary">
-                        Check More Records of Employees
+                        Did you know?
                     </h5>
+
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead class="thead-light">
@@ -147,12 +180,61 @@ const MainDashboard = ({member_id}) => {
                         </table>
                     </div>
                 </div>
-                <div className="col-lg-5 col-md-6 col-sm-12 col-sm-offset-5">
-                    <h4 className='title mt-3 mb-3 text-center text-secondary'>Data in Chart</h4>
-                    {/* <div className="mb-5" style={{ height: "300px", width: "400px" }}><DoshaChart /> </div> */}
-                </div>
-            </div>
+            </div> */}
 
+            <div className="slideshow">
+                <div className="slideshowSlider"
+                    style={{ transform: `translate3d(${-index * 700}px, 0, 0)` }}
+                >
+                    {colors.map((backgroundColor, index) => (
+                        <div className="slide" key={index} style={{ backgroundColor }}>
+                            <div className='slideshowText'>
+                                {healthTips.length > 0 ?
+
+                                    <div>
+                                        <p className='testtt'>
+                                            {healthTips[index].tip}
+                                        </p>
+                                        {/* {
+                                            healthTips.map(Tips => (
+                                                <div className="slideshowText" key={Tips._id}>
+                                                    <h2>{Tips.tip}</h2>
+                                                    {console.log(Tips.tip)}
+                                                </div>
+                                            ))
+                                        } */}
+                                    </div>
+                                    :
+                                    ''}
+                                {console.log(healthTips)}
+
+                                {/* {healthTips[0].tip} */}
+                            </div>
+
+
+                            {/* <div>
+                                {
+                                    healthTips.map(Tips => (
+                                        <div className="slideshowText" key={Tips._id}>
+                                            <h2>{Tips.tip}</h2>
+                                            {console.log(Tips.tip)}
+                                        </div>
+                                    ))
+                                }
+                            </div> */}
+                        </div>
+                    ))}
+                </div>
+
+                <div className="slideshowDots">
+                    {colors.map((_, idx) => (
+                        <div key={idx} className={`slideshowDot${index === idx ? " active" : ""}`}
+                            onClick={() => { setIndex(idx); }}
+                        />
+                    ))}
+                </div>
+
+                {/* </div>
             <a id="more"></a>
             <hr />
             <h2 class="sub-header mt-5">Use card decks for equal height rows of cards</h2>
@@ -423,7 +505,7 @@ const MainDashboard = ({member_id}) => {
                     <p class="mt-4">
                         <a href="/go/KrUO8QpyXP/bootstrao-4-dashboard" target="_ext">Get this Bootstrap 4 admin dashboard at Codeply</a>
                     </p>
-                </div>
+                </div> */}
             </div>
 
         </div>

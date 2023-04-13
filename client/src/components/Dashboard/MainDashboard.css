@@ -1,3 +1,79 @@
 .display-4 span {
     font-size: 38px;
 }
+
+/* Slideshow */
+
+.slideshow {
+    margin: 0 auto;
+    margin: 10rem;
+    overflow: hidden;
+    max-width: 700px;
+    transform: translate(0, -150px)
+}
+
+.slideshowSlider {
+    white-space: nowrap;
+    transition: ease 1000ms;
+}
+
+.slideshowText {
+    margin-left: auto;
+    margin-top: auto;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 700px;
+    align-self: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:  large;
+    transform: translate(0,40px);
+    text-shadow: 2px 2px  black;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+
+.slide {
+    display: inline-block;
+    height: 150px;
+    width: 700px;
+    border-radius: 40px;
+}
+
+.testtt {
+    width: 500px;
+    max-width: 500px;
+    /* overflow: hidden;
+    overflow-wrap: break-word; */
+    line-height: 1.5em;
+    height: 3em;
+    /* overflow: hidden; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
+    width: 100%;
+    /* text-overflow: ellipsis; */
+}
+
+/* Buttons */
+.slideshowDots {
+    text-align: center;
+}
+
+.slideshowDot {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 15px 7px 0px;
+    background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+    background-color: #1bbe93;
+}

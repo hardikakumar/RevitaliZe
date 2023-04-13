@@ -124,7 +124,6 @@ app.post("/doshareport", (req, res) => {
     kapha,
   });
   doshareport.save();
-  //console.log(doshareport);
   console.log(doshareport);
 });
 
@@ -144,15 +143,6 @@ app.post("/latestDoshaScore", async (req, res) => {
 
 app.post("/DoshaReports", async (req, res) => {
 
-  const { member_id } = req.body;
-  const reports = await DoshaReportModel.find({ member_id: member_id })
-  res.send(reports);
-
-})
-
-// GET FEATURE TO CHECK THE LATEST 
-
-app.get("/Dosha", async (req, res) => {
   const { member_id } = req.body;
   const reports = await DoshaReportModel.find({ member_id: member_id })
   res.send(reports);
@@ -263,12 +253,12 @@ app.post("/deleteReminder", (req, res) => {
 
 // Feedbacks written by the user
 
-app.post("/UserFeedbacks", (req, res) => {
+app.post("/UserFeedbacks", async(req, res) => {
 
-  const { member_id, feedback } = req.body;
+  const { member_id, feedbackMsg} = req.body;
   const feedbacks = new FeedbacksModel({
     member_id,
-    feedback,
+    feedbackMsg, 
   });
 
   feedbacks.save();

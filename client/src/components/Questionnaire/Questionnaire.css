@@ -1,5 +1,5 @@
 body {
-    margin: 0;
+    /* margin: 0; */
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
         'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
         sans-serif;
@@ -8,7 +8,7 @@ body {
 }
 
 .setBackground {
-    background-color: #D0F0C0;
+    background-color: rgba(208, 240, 192, 0.7);
     display: flex;
     /* justify-content: right; */
     align-items: center;
@@ -27,26 +27,31 @@ img {
     height: 550px;
     width: auto;
     /* float: right; */
-    transform: translate(20%);
+    transform: translate(15%);
+    
 }
 
 .welcomeMsg {
-    color: #252D4A;
-    transform: translate(10%, -1000%);
+    color: rgb(74, 71, 71);
+    transform: translate(20%, -700%);
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-style:oblique;
 }
 
 .app {
     /* background-color: #252D4A; */
     background-color: #EAA222;
-    width: 450px;
+    width: 500px;
     min-height: 200px;
     height: min-content;
     border-radius: 15px;
-    padding: 20px;
+    padding: 30px;
+    margin: 0 0 0 -8rem;
     box-shadow: 10px 10px 42px 0px rgba(63, 59, 59, 0.75);
     /* display: flex; */
     justify-content: space-evenly;
-    translate: transform(70%)
+    translate: transform(50%)
         /* transform: translate(0%); */
 }
 
@@ -112,3 +117,13 @@ button[type="options"] svg {
     margin-right: 5px;
 }
 
+.text-center{
+    font-size: 2.2rem;
+    padding: 10 px;
+}
+
+.text-cen{
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}

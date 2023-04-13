@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import photo from './images/photo.png';
 import { useNavigate, useLocation } from "react-router-dom";
 import './Questionnaire.css';
@@ -9,16 +9,18 @@ import { Button } from 'react-bootstrap';
 const Questionnaire = () => {
   const id = useLocation();
   const member_id = id.state.id;
-  console.log(member_id);
+  const name = id.state.name;
+  // const member_id = '641df0dcf6fa41af073446c8';
+  // const name = 'Hardika';
 
   const navigate = useNavigate();
   const [currentQues, setCurrentQues] = useState(0);
   const [sliderPos, setSlider] = useState({ x: 5 });
   const [showStart, setShowStart] = useState(true);
   const [questions, setQues] = useState([]);
-  var [vatta, setVatta] = useState(0);
-  var [pitta, setPitta] = useState(0);
-  var [kapha, setKapha] = useState(0);
+  const vattaScore = useRef(0);
+  const pittaScore = useRef(0);
+  const kaphaScore = useRef(0);
 
   try {
     axios.post('http://localhost:5000/questionnaire').then((data) => {
@@ -27,32 +29,27 @@ const Questionnaire = () => {
       console.log(err);
     })
   }
-
   catch (error) {
     console.error(error);
   }
 
   const handleSubmit = () => {
     const date = Date().toLocaleString();
+    const vatta = (((vattaScore.current-4)/12)*10).toFixed(1);
+    const pitta = (((pittaScore.current-4)/12)*10).toFixed(1);
+    const kapha = (((kaphaScore.current-4)/12)*10).toFixed(1);
+
 
     try {
-      vatta = ((vatta-4)/12)*10;
-      pitta = ((pitta-4)/12)*10;
-      kapha = ((kapha-4)/12)*10;
-      vatta = Math.round((vatta + Number.EPSILON) * 100) / 100
-      pitta = Math.round((pitta + Number.EPSILON) * 100) / 100
-      kapha = Math.round((kapha + Number.EPSILON) * 100) / 100
-    
-      axios.post('http://localhost:5000/doshareport', {vatta, pitta, kapha, member_id, date});
-    {
-      navigate('/dashboard', { state: { member_id: member_id } })
-    }
-    } catch (error) 
-    {
+      axios.post('http://localhost:5000/doshareport', { vatta, pitta, kapha, member_id, date });
+      {
+        navigate('/dashboard', { state: { id: member_id, name: name } })
+      }
+    } catch (error) {
       console.error(error);
     }
   }
-  
+
 
   const handleAnswerResponse = (pos) => {
     var addScore;
@@ -64,16 +61,14 @@ const Questionnaire = () => {
     var temp;
     switch (questions[0][currentQues].dosha) {
       case 'v':
-        temp = vatta + addScore;
-        setVatta(temp);
+        vattaScore.current += addScore;
         break;
       case 'p':
-        temp = pitta + addScore;
-        setPitta(temp);
+        pittaScore.current += addScore;
         break;
       case 'k':
-        temp = kapha + addScore;
-        setKapha(temp);
+        kaphaScore.current += addScore;
+        
     }
 
     const nextQues = currentQues + 1;
@@ -86,8 +81,7 @@ const Questionnaire = () => {
     <div>
       <div className='setBackground'>
         <div className='welcomeMsg'>
-          {/* <h1>WELCOME {name.state.name}</h1> */}
-          Welcome Hardika
+          Hello {name.split(' ')[0]},
         </div>
         <div className='app'>
           <>
@@ -95,7 +89,7 @@ const Questionnaire = () => {
               {showStart ? (
                 <>
                   <div class='text-center'>Ready?</div>
-                  <div class='text-center'><Button onClick={() => setShowStart(false)} classname='btn btn-xl' variant='success' btn-xl>START</Button></div>
+                  <div class='text-cen'><Button onClick={() => setShowStart(false)} classname='btn btn-xl' variant='success' btn-xl>START</Button></div>
                 </>
               )
                 : (
