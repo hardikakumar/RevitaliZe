@@ -3,8 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-var sha256 = require("js-sha256"); // For Encryption
-const mongoose = require("mongoose"); // For Database
+var sha256 = require("js-sha256");          // For Encryption
+const mongoose = require("mongoose");      // For Database
 
 const DB =
   "mongodb+srv://singh:singh@cluster0.qiskiyr.mongodb.net/revitalize?retryWrites=true&w=majority";
@@ -161,6 +161,7 @@ app.get("/Dosha", async (req, res) => {
 
 // REMEDIES
 
+// TO POST REMEDIES FROM THE DOCTOR PANEL INTO THE DATABASE
 app.post("/Remedies", async (req, res) => {
   const { RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha } = req.body;
 
@@ -178,6 +179,130 @@ app.post("/Remedies", async (req, res) => {
   remedy.save();
   console.log("Remedy object:", remedy);
   res.send(remedy);
+})
+
+// TO FETCH REMEDIES TO DISPLAY THE REQUIRED REMEDIES FOR THE USER
+
+app.get("/remedy", async (req,res) => {
+  
+
+  const kScore = 6;
+  const pScore = 7;
+  const vScore = 3;
+  
+  let Kr, Pr, Vr, max ;
+  const min = 0;
+
+  if(kScore < 3)
+  {
+    Kr = 1;
+  }
+  else if(kScore <= 5)
+  {
+    Kr = 2;
+  }
+  else if(kScore <= 8)
+  {
+    Kr = 3;
+  } 
+  else
+  {
+    Kr = 4;
+  }
+
+
+  if(pScore < 3)
+  {
+    Pr = 1;
+  }
+  else if(pScore <= 5)
+  {
+    Pr = 2;
+  }
+  else if(pScore <= 8)
+  {
+    Pr = 3;
+  } 
+  else
+  {
+    Pr = 4;
+  }
+
+
+  if(vScore < 3)
+  {
+    Vr = 1;
+  }
+  else if(vScore <= 5)
+  {
+    Vr = 2;
+  }
+  else if(vScore <= 8)
+  {
+    Vr = 3;
+  } 
+  else
+  {
+    Vr = 4;
+  }
+  
+
+
+  const kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
+  const vata = await RemediesModel.find({Dosha : "v"}, {Hyperthyroidism : false}, {Hypothyroidism : false});
+  const pitta = await RemediesModel.find({Dosha : "p"}, {PCOD: false});
+
+  var count;
+  var result = {};
+
+  const values = { "f" : 10, "v" : 10, "g" : 10, "n" : 5, "o" : 4, "s" : 10};
+
+
+  // for(key in values)
+  // {
+  //   console.log(values[key]);
+  // }
+
+
+// FOR PITTA DOSHA
+
+for(let i = 1; i <= Pr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        result[pitta[count].RemedyName] = pitta[count].Description;
+    }
+}
+
+// FOR KKAPHA DOSHA
+
+for(let i = 1; i <= Pr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        result[kapha[count].RemedyName] = kapha[count].Description;
+    }
+}
+ 
+
+// FOR VATA DOSHA
+
+for(let i = 1; i <= Pr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        result[vata[count].RemedyName] = vata[count].Description;
+    }
+}
+
+  res.send(result);
+
 })
 
 
