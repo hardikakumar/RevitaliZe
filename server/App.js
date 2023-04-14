@@ -214,19 +214,22 @@ setInterval(() => {
 }, 1000);
 
 
-app.get("/getAllReminder", (req, res) => {
-  ReminderModel.find({}).then((reminderList) => {
+app.post("/getAllReminder", (req, res) => {
+  const { member_id } = req.body
+
+  ReminderModel.find({ member_id: member_id }).then((reminderList) => {
     if (reminderList) res.send(reminderList);
   })
 })
 
 
 app.post("/addReminder", async (req, res) => {
-  const { reminderMsg, remindAt, reminderFreq } = req.body
+  const { reminderMsg, remindAt, reminderFreq, member_id } = req.body
   const reminder = new ReminderModel({
     reminderMsg,
     remindAt,
-    reminderFreq
+    reminderFreq,
+    member_id
   })
 
   reminder.save();
@@ -253,12 +256,12 @@ app.post("/deleteReminder", (req, res) => {
 
 // Feedbacks written by the user
 
-app.post("/UserFeedbacks", async(req, res) => {
+app.post("/UserFeedbacks", async (req, res) => {
 
-  const { member_id, feedbackMsg} = req.body;
+  const { member_id, feedbackMsg } = req.body;
   const feedbacks = new FeedbacksModel({
     member_id,
-    feedbackMsg, 
+    feedbackMsg,
   });
 
   feedbacks.save();

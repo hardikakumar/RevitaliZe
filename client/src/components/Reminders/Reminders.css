@@ -14,7 +14,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(to bottom right, rgb(255, 253, 125), rgb(151, 250, 184), rgb(253, 209, 158))
+    background: url('./reminderPic.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background: linear-gradient(to bottom right, rgb(255, 253, 125), rgb(151, 250, 184), rgb(253, 209, 158)) */
 }
 
 .reminder_homepage_header {

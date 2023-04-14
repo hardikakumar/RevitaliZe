@@ -1,6 +1,8 @@
-/* .backgroundImage {
-    background-image: url("bgImage.png");
-} */
+.my-class {
+    background: url('./bgImage.jpg');
+    background-repeat: no-repeat;
+    background-size: 83rem;
+}
 
 .checkbox-design1 {
     display: flex;

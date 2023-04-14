@@ -10,6 +10,9 @@ const ReminderSchema = new Schema({
     },
     reminderFreq: {
         type: Number
+    },
+    member_id: {
+        type: String
     }
 }
 )

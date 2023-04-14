@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom';
 
 function Reminders() {
     let id = useLocation();
+    const member_id = id.state.id;
 
     const [reminderMsg, setReminderMsg] = useState("")
     const [remindAt, setRemindAt] = useState()
@@ -18,16 +19,16 @@ function Reminders() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:5000/getAllReminder").then(res => setReminderList(res.data))
+        axios.post("http://localhost:5000/getAllReminder", {member_id}).then(res => setReminderList(res.data))
     }, [])
 
     const addReminder = () => {
-        axios.post("http://localhost:5000/addReminder", { reminderMsg, remindAt, reminderFreq })
+        axios.post("http://localhost:5000/addReminder", { reminderMsg, remindAt, reminderFreq, member_id})
             .then(res => setReminderList(res.data))
         setReminderMsg("")
         setRemindAt()
         setReminderFreq()
-        axios.get("http://localhost:5000/getAllReminder").then(res => setReminderList(res.data))
+        axios.post("http://localhost:5000/getAllReminder", {member_id}).then(res => setReminderList(res.data))
     }
 
     const deleteReminder = (id) => {

@@ -12,7 +12,7 @@ const DoctorDashboard = () => {
     return (
         <div>
             <Navbar />
-            <div class="container-fluid" id="main">
+            <div class="container-fluid bgImage" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     <Sidebar member_id = {id.state.id} member_name = {id.state.name}/>
 

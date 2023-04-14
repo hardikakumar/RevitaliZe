@@ -29,8 +29,7 @@ img {
 /* Navigation menu styles */
 nav {
   background-color: #588970;
-  background-image: url('../../assets/images/darkGreen.jpg');
-  /* background-color: #C7F6B6; */
+  background-image: url('../../assets/images/navImg.jpg');
   color: #fff;
   display: flex;
   justify-content: space-between;

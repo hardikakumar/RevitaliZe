@@ -14,7 +14,7 @@ const MainDashboard = ({ member_id }) => {
 
 
     // Slideshow
-    const colors = ["#00C49F", "#FFBB28", "#0088FE", "#00C49F", "#FFBB28", "#0088FE", "#00C49F", "#FFBB28", "#0088FE", "#00C49F"];
+    const colors = ["#5F6F52", "#A9B388", "#FEFAE0", "#F9EBC7", "#B99470", "#C4661F", "#783D19", "#5F6F52", "#A9B388", "#FEFAE0"];
     const [index, setIndex] = useState(0);
     const delay = 4200;
     const timeoutRef = useRef(null);
@@ -73,31 +73,14 @@ const MainDashboard = ({ member_id }) => {
 
     return (
         <div className="col main pt-5 mt-2">
-            {/* <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Home</a></li>
-                    <li className="breadcrumb-item"><a href="#">Library</a></li>
-                    <li className="breadcrumb-item active" aria-current="page">Data</li>
-                </ol>
-            </nav> */}
-            {/* <p className="lead d-none d-sm-block">Add Employee Details and Records</p>
-
-            <div className="alert alert-warning fade collapse" role="alert" id="myAlert">
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                    <span className="sr-only">Close</span>
-                </button>
-                <strong>Data and Records</strong> Learn more about employee
-            </div> */}
-
             <p></p>
             <div className="row mb-3">
                 <div className="col-xl-3 col-sm-6 py-2">
-                    <div className="card bg-success text-white h-100">
-                        <div className="card-body bg-success" style={{ backgroundColor: "#57b960" }}>
+                    <div className="card bg-success text-white h-100" style={{ backgroundColor: "#9E523B", borderRadius: '20px' }}>
+                        <div className="card-body" style={{ backgroundColor: "#9E523B", borderRadius: '20px' }}>
                             <div className="rotate">
                                 {/* <i className="fa fa-solid fa-leaf fa-5x"></i> */}
-                                <FaLeaf style={{ fontSize: '70px' }} />
+                                <FaLeaf style={{ color: '#86DC3D', fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Kapha</h6>
@@ -106,10 +89,10 @@ const MainDashboard = ({ member_id }) => {
                     </div>
                 </div>
                 <div className="col-xl-3 col-sm-6 py-2">
-                    <div className="card text-white bg-danger h-100">
-                        <div className="card-body bg-danger">
+                    <div className="card text-white bg-danger h-100" style={{ backgroundColor: "#B9030A", borderRadius: '20px' }}>
+                        <div className="card-body" style={{ backgroundColor: "#B9030A", borderRadius: '20px' }}>
                             <div className="rotate">
-                                <FaFire style={{ fontSize: '70px' }} />
+                                <FaFire style={{ color: '#FCA510', fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Pitta</h6>
@@ -118,10 +101,10 @@ const MainDashboard = ({ member_id }) => {
                     </div>
                 </div>
                 <div className="col-xl-3 col-sm-6 py-2">
-                    <div className="card text-white bg-info h-100">
-                        <div className="card-body bg-info">
+                    <div className="card text-white bg-info h-100" style={{ backgroundColor: "#08254C", borderRadius: '20px' }}>
+                        <div className="card-body" style={{ backgroundColor: "#08254C", borderRadius: '20px' }}>
                             <div className="rotate">
-                                <FaFirefox style={{ fontSize: '70px' }} />
+                                <FaFirefox style={{ color: '#D0EFFF', fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 className="text-uppercase">Vata</h6>
@@ -130,10 +113,10 @@ const MainDashboard = ({ member_id }) => {
                     </div>
                 </div>
                 <div class="col-xl-3 col-sm-6 py-2">
-                    <div class="card text-white bg-warning h-100">
-                        <div class="card-body">
+                    <div class="card text-white bg-warning h-100" style={{ backgroundColor: "#481F01", borderRadius: '20px' }}>
+                        <div className="card-body" style={{ backgroundColor: "#481F01", borderRadius: '20px' }}>
                             <div class="rotate">
-                                <TbAwardFilled style={{ fontSize: '70px' }} />
+                                <TbAwardFilled style={{ color: '#FFB300', fontSize: '70px' }} />
                                 <p></p>
                             </div>
                             <h6 class="text-uppercase">Streaks</h6>
@@ -146,7 +129,7 @@ const MainDashboard = ({ member_id }) => {
             <hr />
 
             <h5 class="mt-3 mb-3 text-secondary">
-                Did you know?
+                Health Tips
             </h5>
             {/* <div class="row ">
                 <div class="col-lg-7 col-md-6 col-sm-12">

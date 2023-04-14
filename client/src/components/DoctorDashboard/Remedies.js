@@ -7,7 +7,6 @@ import axios from 'axios';
 import './DoctorDashboard.css'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import bgImage from './bgImage.png';
 import { useLocation } from 'react-router-dom';
 import './Remedies.css'
 
@@ -41,7 +40,7 @@ const Remedies = () => {
     return (
         <div>
             <Navbar />
-            <div class="container-fluid" id="main">
+            <div class="container-fluid my-class" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     <Sidebar member_id={id.state.id} member_name={id.state.name} />
 
