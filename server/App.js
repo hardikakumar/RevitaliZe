@@ -3,8 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-var sha256 = require("js-sha256"); // For Encryption
-const mongoose = require("mongoose"); // For Database
+var sha256 = require("js-sha256");          // For Encryption
+const mongoose = require("mongoose");      // For Database
 
 const DB =
   "mongodb+srv://singh:singh@cluster0.qiskiyr.mongodb.net/revitalize?retryWrites=true&w=majority";
@@ -161,6 +161,7 @@ app.get("/Dosha", async (req, res) => {
 
 // REMEDIES
 
+// TO POST REMEDIES FROM THE DOCTOR PANEL INTO THE DATABASE
 app.post("/Remedies", async (req, res) => {
   const { RemedyName, Description, Eczema, Hyperthyroidism, Hypothyroidism, PCOD, Type, Dosha } = req.body;
 
@@ -178,6 +179,169 @@ app.post("/Remedies", async (req, res) => {
   remedy.save();
   console.log("Remedy object:", remedy);
   res.send(remedy);
+})
+
+// TO FETCH REMEDIES TO DISPLAY THE REQUIRED REMEDIES FOR THE USER
+
+app.get("/remedy", async (req,res) => {
+  
+  // const{kScore, pScore, vScore, medicalCondition } = req.body;
+
+  const kScore = 6;
+  const pScore = 7;
+  const vScore = 3;
+  
+  let Kr, Pr, Vr;
+  var fruit, veg, grain, oil, spices, nuts, max;
+
+
+  const min = 0;
+
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE KAPHA DOSHA SCORE
+
+  if(kScore < 3)
+  {
+    Kr = 1;
+  }
+  else if(kScore <= 5)
+  {
+    Kr = 2;
+  }
+  else if(kScore <= 8)
+  {
+    Kr = 3;
+  } 
+  else
+  {
+    Kr = 4;
+  }
+
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE PITTA DOSHA SCORE
+
+  if(pScore < 3)
+  {
+    Pr = 1;
+  }
+  else if(pScore <= 5)
+  {
+    Pr = 2;
+  }
+  else if(pScore <= 8)
+  {
+    Pr = 3;
+  } 
+  else
+  {
+    Pr = 4;
+  }
+
+
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE VATA DOSHA SCORE
+
+  if(vScore < 3)
+  {
+    Vr = 1;
+  }
+  else if(vScore <= 5)
+  {
+    Vr = 2;
+  }
+  else if(vScore <= 8)
+  {
+    Vr = 3;
+  } 
+  else
+  {
+    Vr = 4;
+  }
+  
+
+
+  const kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
+  const vata = await RemediesModel.find({Dosha : "v"}, {Hyperthyroidism : false}, {Hypothyroidism : false});
+  const pitta = await RemediesModel.find({Dosha : "p"}, {PCOD: false});
+  
+
+  var count;
+  var result = {};
+  var types = {};
+
+  const values = { "f" : 10, "v" : 10, "g" : 10, "n" : 5, "o" : 4, "s" : 10};
+
+
+  // for(key in values)
+  // {
+  //   console.log(values[key]);
+  // }
+
+  // var fruit, veg, grain, oil, spices, nuts, max;
+  // fruit = pitta.filter(obj => obj.Type == 'f')
+  // veg = pitta.filter(obj => obj.Type == 'v')
+
+  
+var tp;
+
+// FOR PITTA DOSHA
+
+for(key in values)
+  {
+      types[key] = pitta.filter(obj => obj.Type == key)
+  }
+
+for(let i = 1; i <= Pr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
+    }
+}
+
+
+
+// FOR KAPHA DOSHA
+
+for(key in values)
+{
+    types[key] = kapha.filter(obj => obj.Type == key)
+}
+
+for(let i = 1; i <= Kr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
+    }
+}
+ 
+
+
+
+// FOR VATA DOSHA
+
+for(key in values)
+{
+    types[key] = vata.filter(obj => obj.Type == key)
+}
+
+for(let i = 1; i <= Vr; i++)
+{
+    for(key in values)
+    {
+        max = values[key];
+        let count = Math.floor(Math.random() * (max - min + 1)) + min;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
+    }
+}
+
+  res.send(result);
+
 })
 
 

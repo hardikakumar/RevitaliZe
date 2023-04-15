@@ -41,7 +41,6 @@ function LoginForm() {
             const name = response.data.name;
             const id = response.data._id;
             console.log(id);
-            alert('Login successfull');
             if (isDoctorEmail(email)) navigate('/doctor-dashboard', { state: { id: id, name: name } });
             else navigate('/dashboard', { state: { id: id, name: name } });
         }
