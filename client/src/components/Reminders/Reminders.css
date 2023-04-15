@@ -1,11 +1,9 @@
-.Reminder {
-    display: flex;
-    width: 100vw;
-    height: 150vh;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
+.bgImage {
+    background: url('./rmPic.jpg');
+    background-repeat: no-repeat;
+    background-size: 83rem;
 }
+
 
 .reminder_homepage {
     min-width: 100%;
@@ -14,7 +12,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: url('./reminderPic.jpg');
+    /* background: url('./reminderPic.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;
     /* background: linear-gradient(to bottom right, rgb(255, 253, 125), rgb(151, 250, 184), rgb(253, 209, 158)) */

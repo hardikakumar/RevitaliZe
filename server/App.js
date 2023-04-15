@@ -233,7 +233,7 @@ app.post("/addReminder", async (req, res) => {
   })
 
   reminder.save();
-  ReminderModel.find({}).then((reminderList) => {
+  ReminderModel.find({member_id}).then((reminderList) => {
     if (reminderList) {
       res.send(reminderList);
     }
@@ -241,8 +241,9 @@ app.post("/addReminder", async (req, res) => {
 })
 
 app.post("/deleteReminder", (req, res) => {
-  ReminderModel.deleteOne({ _id: req.body.id }).then(() => {
-    ReminderModel.find({}).then((reminderList) => {
+  const {reminder_id, member_id} = req.body
+  ReminderModel.deleteOne({ _id: reminder_id }).then(() => {
+    ReminderModel.find({member_id}).then((reminderList) => {
       if (reminderList) {
         res.send(reminderList)
       }
