@@ -1,5 +1,6 @@
-.bgImage {
-    background: url('./rmPic.jpg');
+.reminderBG {
+    /* background: url('./rmPic.jpg'); */
+    background-color: antiquewhite;
     background-repeat: no-repeat;
     background-size: 83rem;
 }

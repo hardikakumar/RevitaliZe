@@ -37,16 +37,14 @@ function Reminders() {
             .then(res => setReminderList(res.data))
     }
 
-
     return (
         <div>
             <Navbar />
-            <div class="container-fluid bgImage" id="main">
+            <div class="container-fluid reminderBG" id="main">
                 <div class="row row-offcanvas row-offcanvas-left">
                     <Sidebar member_id={id.state.id} member_name={id.state.name} />
 
                     <div className="col main pt-5 mt-3">
-
                         <div className="reminder_homepage">
                             <div className="reminder_homepage_header">
                                 <h1>Remind Me 🕰️</h1>
@@ -101,7 +99,7 @@ function Reminders() {
                             </div>
 
 
-                            {reminderList.length >= 0 ?
+                            {reminderList.length > 0 ?
                                 <div className="reminder_homepage_body">
                                     {
                                         reminderList.map(reminder => (

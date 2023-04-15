@@ -89,7 +89,7 @@ const Questionnaire = () => {
               {showStart ? (
                 <>
                   <div class='text-center'>Ready?</div>
-                  <div class='text-cen'><Button onClick={() => setShowStart(false)} classname='btn btn-xl' variant='success' btn-xl>START</Button></div>
+                  <div class='text-center'><Button onClick={() => setShowStart(false)} classname='btn btn-lg btn-block' variant='success' btn-lg btn-block>START</Button></div>
                 </>
               )
                 : (

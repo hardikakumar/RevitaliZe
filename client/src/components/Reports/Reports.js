@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from '../Dashboard/NavBar';
 import Sidebar from '../Dashboard/SideBar';
 import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
+
+import { useNavigate } from "react-router-dom";
 import './Reports.css';
 
 function Reports() {
@@ -14,9 +16,8 @@ function Reports() {
 
     useEffect(() => {
         try {
-            axios.post('http://localhost:5000/DoshaReports', {member_id}).then((data) => {
-                console.log(data.data);
-                setRecord([...data.data])
+            axios.post('http://localhost:5000/DoshaReports', { member_id }).then((data) => {
+                setRecord([...data.data].reverse())
             }).catch(err => {
                 console.log(err);
             })
@@ -26,6 +27,7 @@ function Reports() {
         }
     }, []);
 
+    const navigate = useNavigate();
     return (
         <div>
             <Navbar />
@@ -46,10 +48,11 @@ function Reports() {
                                         </tr>
                                     </thead>
 
+                                    
                                     <tbody>
                                         {record.slice(0, 5).map((output) =>
                                             <tr>
-                                                <td>{output.date.split(' ')[0]}, {output.date.split(' ').slice(1,4).join(' ')}</td>
+                                                <td>{output.date.split(' ')[0]}, {output.date.split(' ').slice(1, 4).join(' ')}</td>
                                                 <td>{output.vatta}</td>
                                                 <td>{output.pitta}</td>
                                                 <td>{output.kapha}</td>
@@ -57,11 +60,12 @@ function Reports() {
                                             </tr>
                                         )}
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
 
-                        For full report <button className='btn btn-success'>Download PDF here</button>
+                        For full report <button className='btn btn-success' onClick={() => {let newWin = window.open('/downloadReport', '_blank'); newWin.record=record}}>Download PDF here</button>
                     </div>
                 </div>
             </div>

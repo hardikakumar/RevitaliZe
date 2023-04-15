@@ -16,7 +16,7 @@ const Sidebar = ({ member_id, member_name }) => {
     const navigate = useNavigate();
 
     return (
-        <div class="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" style={{ backgroundColor: "#3f180a" , height: '601px'}}>
+        <div class="col-md-3 col-lg-2 sidebar-offcanvas pl-0" id="sidebar" role="navigation" style={{ backgroundColor: "#3f180a" , height: '900px'}}>
             <div>
                 <Modal
                     size='md'
