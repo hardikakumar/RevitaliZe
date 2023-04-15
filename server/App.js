@@ -185,13 +185,19 @@ app.post("/Remedies", async (req, res) => {
 
 app.get("/remedy", async (req,res) => {
   
+  // const{kScore, pScore, vScore, medicalCondition } = req.body;
 
   const kScore = 6;
   const pScore = 7;
   const vScore = 3;
   
-  let Kr, Pr, Vr, max ;
+  let Kr, Pr, Vr;
+  var fruit, veg, grain, oil, spices, nuts, max;
+
+
   const min = 0;
+
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE KAPHA DOSHA SCORE
 
   if(kScore < 3)
   {
@@ -210,6 +216,7 @@ app.get("/remedy", async (req,res) => {
     Kr = 4;
   }
 
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE PITTA DOSHA SCORE
 
   if(pScore < 3)
   {
@@ -228,6 +235,8 @@ app.get("/remedy", async (req,res) => {
     Pr = 4;
   }
 
+
+  // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE VATA DOSHA SCORE
 
   if(vScore < 3)
   {
@@ -251,9 +260,11 @@ app.get("/remedy", async (req,res) => {
   const kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
   const vata = await RemediesModel.find({Dosha : "v"}, {Hyperthyroidism : false}, {Hypothyroidism : false});
   const pitta = await RemediesModel.find({Dosha : "p"}, {PCOD: false});
+  
 
   var count;
   var result = {};
+  var types = {};
 
   const values = { "f" : 10, "v" : 10, "g" : 10, "n" : 5, "o" : 4, "s" : 10};
 
@@ -263,41 +274,69 @@ app.get("/remedy", async (req,res) => {
   //   console.log(values[key]);
   // }
 
+  // var fruit, veg, grain, oil, spices, nuts, max;
+  // fruit = pitta.filter(obj => obj.Type == 'f')
+  // veg = pitta.filter(obj => obj.Type == 'v')
+
+  
+var tp;
 
 // FOR PITTA DOSHA
 
+for(key in values)
+  {
+      types[key] = pitta.filter(obj => obj.Type == key)
+  }
+
 for(let i = 1; i <= Pr; i++)
 {
     for(key in values)
     {
         max = values[key];
         let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        result[pitta[count].RemedyName] = pitta[count].Description;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
     }
 }
 
-// FOR KKAPHA DOSHA
 
-for(let i = 1; i <= Pr; i++)
+
+// FOR KAPHA DOSHA
+
+for(key in values)
+{
+    types[key] = kapha.filter(obj => obj.Type == key)
+}
+
+for(let i = 1; i <= Kr; i++)
 {
     for(key in values)
     {
         max = values[key];
         let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        result[kapha[count].RemedyName] = kapha[count].Description;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
     }
 }
  
 
+
+
 // FOR VATA DOSHA
 
-for(let i = 1; i <= Pr; i++)
+for(key in values)
+{
+    types[key] = vata.filter(obj => obj.Type == key)
+}
+
+for(let i = 1; i <= Vr; i++)
 {
     for(key in values)
     {
         max = values[key];
         let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        result[vata[count].RemedyName] = vata[count].Description;
+        tp = types[key];
+        result[tp[count].RemedyName] = tp[count].Description;
     }
 }
 
