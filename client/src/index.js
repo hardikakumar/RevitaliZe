@@ -9,6 +9,7 @@ import DoctorDashboard from './components/DoctorDashboard/DoctorDashboard.js';
 import DoctorDashboardRemedies from './components/DoctorDashboard/Remedies.js';
 import Reminder from './components/Reminders/Reminders.js';
 import Remedies from './components/Remedies/Remedies.js';
+import CompleteRemedies from './components/Remedies/CompleteReport.js';
 import Reports from './components/Reports/Reports.js';
 import DownloadReport from './components/Reports/DownloadReport.js';
 import reportWebVitals from './reportWebVitals';
@@ -24,6 +25,7 @@ root.render(
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/reminder" element={<Reminder />} />
       <Route path="/remedies" element={<Remedies />} />
+      <Route path="/completeRemedies" element={<CompleteRemedies />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/downloadReport" element={<DownloadReport />} />
       <Route path="/doctor-dashboard" element={<DoctorDashboard />} />

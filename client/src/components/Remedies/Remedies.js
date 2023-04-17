@@ -69,10 +69,19 @@ const Remedies = () => {
 
                     <ModalHeader>
                         Remedies
+                        <button className='btn btn-success pull-right' style={{ marginLeft: '190px' }}
+                            onClick={() => {
+                                let newWin = window.open('/completeRemedies', '_blank');
+                                newWin.member_id = member_id;
+                                newWin.remedies = remedies.current;
+                                newWin.remedyName = remedyName.current;
+                            }}>
+                            Get complete Report
+                        </button>
                     </ModalHeader>
-                    <ModalBody style={{height: '450px', overflowY: 'auto', textAlign: 'justify'}}>
-                    <div style={{fontStyle: 'italic'}}>It is recommended for you to consume </div>
-                    <br/>
+                    <ModalBody style={{ height: '450px', overflowY: 'auto', textAlign: 'justify' }}>
+                        <div style={{ fontStyle: 'italic' }}> It is recommended for you to consume </div>
+                        <br />
                         {
                             remedies.current != null ?
                                 remedyName.current.map((rem) => (
@@ -106,10 +115,8 @@ const Remedies = () => {
                                         <h6 className="text-uppercase" style={{ verticalAlign: 'middle', fontSize: '72', fontWeight: 'bold' }}>HyperThyroidism</h6>
                                         <a class="stretched-link" onClick={() => {
                                             showR.current = true;
-                                            // HyperSelected(true);
                                             getRemedies();
                                             showModal();
-                                            // showRemedy(true);
                                         }} />
                                     </div>
                                 </div>
@@ -125,7 +132,6 @@ const Remedies = () => {
                                             showH.current = true;
                                             getRemedies();
                                             showModal();
-                                            // showRemedy(true);
                                         }} />
                                     </div>
                                 </div>
@@ -139,10 +145,8 @@ const Remedies = () => {
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>Eczema </h6>
                                         <a class="stretched-link" onClick={() => {
                                             showE.current = true;
-                                            // EczemaSelected(true); 
                                             getRemedies();
                                             showModal();
-                                            // showRemedy(true)
                                         }} />
                                     </div>
                                 </div>
@@ -159,10 +163,8 @@ const Remedies = () => {
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>PCOD</h6>
                                         <a class="stretched-link" onClick={() => {
                                             showP.current = true;
-                                            // PCODSelected(true);
                                             getRemedies();
                                             showModal();
-                                            // showRemedy(true);
                                         }} />
                                     </div>
                                 </div>
@@ -176,17 +178,13 @@ const Remedies = () => {
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>No medical condition </h6>
                                         <a class="stretched-link" onClick={() => {
                                             showN.current = true;
-                                            // NoMedSelected(true); 
                                             getRemedies();
                                             showModal();
-                                            // showRemedy(true)
                                         }} />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
