@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import Navbar from '../Dashboard/NavBar';
@@ -10,58 +10,80 @@ const Remedies = () => {
     let id = useLocation();
     const member_id = id.state.id;
     const [remedyModal, showRemedy] = useState(false);
-    const [E, EczemaSelected] = useState(false);
-    const [P, PCODSelected] = useState(false);
-    const [R, HyperSelected] = useState(false);
-    const [H, HypoSelected] = useState(false);
+    const showE = useRef(false);
+    const showP = useRef(false);
+    const showR = useRef(false);
+    const showH = useRef(false);
+    const showN = useRef(false);
+    const remedies = useRef([]);
+    const remedyName = useRef([]);
 
-    console.log('here')
-    console.log('E' + E);
-    console.log('P' + P);
-    console.log("Hr" + R);
-    console.log('Ho' + H);
-
-    try {
-
-        axios.post('http://localhost:5000/remedy', { member_id, E, P, R, H }).then((data) => {
-
-        }).catch(err => {
-            console.log(err);
-        })
-    }
-    catch (error) {
-        console.error(error);
-
-    }
+    const getRemedies = async (event) => {
+        try {
+            const E = showE.current;
+            const P = showP.current;
+            const R = showR.current;
+            const H = showH.current;
+            const N = showN.current;
+            axios.post('http://localhost:5000/remedy', { member_id, E, P, R, H, N }).then((data) => {
+                remedies.current = data.data;
+                remedyName.current = [...Object.keys(data.data)];
+                console.log(remedyName.current[0])
+                let x = remedyName.current[0];
+                console.log(remedies.current[x])
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleModalToggle = () => {
         showRemedy(!remedyModal);
-        EczemaSelected(false);
-        PCODSelected(false);
-        HyperSelected(false);
-        HypoSelected(false);
+        showE.current = false
+        showP.current = false
+        showR.current = false
+        showH.current = false
+        showN.current = false
     }
 
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+    const showModal = async () => {
+        await delay(3000);
+        showRemedy(true);
+    }
 
     return (
         <div>
+            <div style={{ Height: '500px', overflowY: 'auto' }}>
 
-            <div>
                 <Modal
                     size='md'
                     isOpen={remedyModal}
-                    toggle={() => {handleModalToggle()}}
+                    toggle={() => { handleModalToggle() }}
                 >
 
                     <ModalHeader>
                         Remedies
                     </ModalHeader>
-                    <ModalBody>
-                        <div>
-                            
-                        </div>
-
-                        {/* <Feedback member_id={member_id} member_name={member_name} /> */}
+                    <ModalBody style={{height: '450px', overflowY: 'auto', textAlign: 'justify'}}>
+                    <div style={{fontStyle: 'italic'}}>It is recommended for you to consume </div>
+                    <br/>
+                        {
+                            remedies.current != null ?
+                                remedyName.current.map((rem) => (
+                                    <div >
+                                        <div style={{ fontWeight: 'bold' }}> {rem} </div>
+                                        <div> {remedies.current[rem]} </div>
+                                        <br />
+                                    </div>
+                                ))
+                                : "no data"
+                        }
                     </ModalBody>
                 </Modal>
 
@@ -81,8 +103,14 @@ const Remedies = () => {
                                         <div className="rotate">
                                             <p></p>
                                         </div>
-                                        <h6 className="text-uppercase" style={{fontSize: '72', fontWeight: 'bold' }}>HyperThyroidism</h6>
-                                        <a class="stretched-link" onClick={() => { HyperSelected(true); showRemedy(true) }} />
+                                        <h6 className="text-uppercase" style={{ verticalAlign: 'middle', fontSize: '72', fontWeight: 'bold' }}>HyperThyroidism</h6>
+                                        <a class="stretched-link" onClick={() => {
+                                            showR.current = true;
+                                            // HyperSelected(true);
+                                            getRemedies();
+                                            showModal();
+                                            // showRemedy(true);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +121,12 @@ const Remedies = () => {
                                             <p></p>
                                         </div>
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>HypoThyroidism </h6>
-                                        <a class="stretched-link" onClick={() => { showRemedy(true); HypoSelected(true) }} />
+                                        <a class="stretched-link" onClick={() => {
+                                            showH.current = true;
+                                            getRemedies();
+                                            showModal();
+                                            // showRemedy(true);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +137,13 @@ const Remedies = () => {
                                             <p></p>
                                         </div>
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>Eczema </h6>
-                                        <a class="stretched-link" onClick={() => { showRemedy(true); EczemaSelected(true) }} />
+                                        <a class="stretched-link" onClick={() => {
+                                            showE.current = true;
+                                            // EczemaSelected(true); 
+                                            getRemedies();
+                                            showModal();
+                                            // showRemedy(true)
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +157,13 @@ const Remedies = () => {
                                             <p></p>
                                         </div>
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>PCOD</h6>
-                                        {/* <h1 className="display-4">6<span>/10</span></h1> */}
-                                        <a class="stretched-link" onClick={() => { showRemedy(true); PCODSelected(true) }} />
+                                        <a class="stretched-link" onClick={() => {
+                                            showP.current = true;
+                                            // PCODSelected(true);
+                                            getRemedies();
+                                            showModal();
+                                            // showRemedy(true);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +174,13 @@ const Remedies = () => {
                                             <p></p>
                                         </div>
                                         <h6 className="text-uppercase" style={{ fontSize: '72', fontWeight: 'bold' }}>No medical condition </h6>
-                                        <a class="stretched-link" onClick={() => showRemedy(true)} />
+                                        <a class="stretched-link" onClick={() => {
+                                            showN.current = true;
+                                            // NoMedSelected(true); 
+                                            getRemedies();
+                                            showModal();
+                                            // showRemedy(true)
+                                        }} />
                                     </div>
                                 </div>
                             </div>

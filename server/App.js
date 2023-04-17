@@ -181,126 +181,108 @@ app.post("/Remedies", async (req, res) => {
 
 // TO FETCH REMEDIES TO DISPLAY THE REQUIRED REMEDIES FOR THE USER
 
-app.post("/remedy", async (req,res) => {
-  
-  // const{member_id, medicalCondition } = req.body;
-
-  const kScore = 6;
-  const pScore = 7;
-  const vScore = 3;
-
-  const member_id = "64392a439f9680cd7048c4f2";
-  const doshas = await DoshaReportModel.find({member_id:member_id});
-  
-  let Kr = doshas.kapha, Pr = doshas.pitta, Vr = doshas.vatta;
+app.post("/remedy", async (req, res) => {
+  const { member_id, E, P, R, H, N } = req.body;
+  // const kScore = 6;
+  // const pScore = 7;
+  // const vScore = 3;
 
 
-  var fruit, veg, grain, oil, spices, nuts, max;
+  const doshas = await DoshaReportModel.find({ member_id: member_id });
+
+  let kScore = doshas.kapha, pScore = doshas.pitta, vScore = doshas.vatta;
+
+  let Kr = 0, Pr = 0, Vr = 0;
+  var max;
 
 
   const min = 0;
 
   // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE KAPHA DOSHA SCORE
 
-  if(kScore < 3)
-  {
+  if (kScore < 3) {
     Kr = 1;
   }
-  else if(kScore <= 5)
-  {
+  else if (kScore <= 5) {
     Kr = 2;
   }
-  else if(kScore <= 8)
-  {
+  else if (kScore <= 8) {
     Kr = 3;
-  } 
-  else
-  {
+  }
+  else {
     Kr = 4;
   }
 
   // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE PITTA DOSHA SCORE
 
-  if(pScore < 3)
-  {
+  if (pScore < 3) {
     Pr = 1;
   }
-  else if(pScore <= 5)
-  {
+  else if (pScore <= 5) {
     Pr = 2;
   }
-  else if(pScore <= 8)
-  {
+  else if (pScore <= 8) {
     Pr = 3;
-  } 
-  else
-  {
+  }
+  else {
     Pr = 4;
   }
 
 
   // NESTED IF-ELSE TO COMPUTE THE REMEDY ACCORDING TO THE VATA DOSHA SCORE
 
-  if(vScore < 3)
-  {
+  if (vScore < 3) {
     Vr = 1;
   }
-  else if(vScore <= 5)
-  {
+  else if (vScore <= 5) {
     Vr = 2;
   }
-  else if(vScore <= 8)
-  {
+  else if (vScore <= 8) {
     Vr = 3;
-  } 
-  else
-  {
+  }
+  else {
     Vr = 4;
   }
-  
-  let pitta = {},vata = {},kapha = {};
-  const E = true;
-  const H = false;
-  const R = false;
-  const P = false;
-  console.log(E);
-  if(E)
-  {
-  kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
-  vata = await RemediesModel.find({Dosha : "v"},    {Eczema: false});
-  pitta = await RemediesModel.find({Dosha : "p"},   {Eczema: false});
-  }
-  else if(R)
-  {
-    kapha = await RemediesModel.find({ Dosha : "k" }, {Hyperthyroidism : false});
-    vata = await RemediesModel.find({Dosha : "v"},    {Hyperthyroidism: false});
-    pitta = await RemediesModel.find({Dosha : "p"},   {Hyperthyroidism: false});
-  }
-  else if(H)
-  {
-    kapha = await RemediesModel.find({ Dosha : "k" }, {Hypothyroidism : false});
-    vata = await RemediesModel.find({Dosha : "v"}, {Hypothyroidism : false});
-    pitta = await RemediesModel.find({Dosha : "p"}, {Hypothyroidism : false});
-  }
-  else if(P)
-  {
-    kapha = await RemediesModel.find({ Dosha : "k" }, {PCOD : false});
-    vata = await RemediesModel.find({Dosha : "v"}, {PCOD : false});
-    pitta = await RemediesModel.find({Dosha : "p"}, {PCOD : false});
-  }
-  else
-  {
-    kapha = await RemediesModel.find({ Dosha : "k" });
-    vata = await RemediesModel.find({Dosha : "v"});
-    pitta = await RemediesModel.find({Dosha : "p"});
-  }
-  
 
-  var count;
+  let pitta = {}, vata = {}, kapha = {};
+
+  console.log(E);
+  if (E) {
+    kapha = await RemediesModel.find({ Dosha: "k" }, { Eczema: false });
+    vata = await RemediesModel.find({ Dosha: "v" }, { Eczema: false });
+    pitta = await RemediesModel.find({ Dosha: "p" }, { Eczema: false });
+  }
+  else if (R) {
+    kapha = await RemediesModel.find({ Dosha: "k" }, { Hyperthyroidism: false });
+    vata = await RemediesModel.find({ Dosha: "v" }, { Hyperthyroidism: false });
+    pitta = await RemediesModel.find({ Dosha: "p" }, { Hyperthyroidism: false });
+  }
+  else if (H) {
+    kapha = await RemediesModel.find({ Dosha: "k" }, { Hypothyroidism: false });
+    vata = await RemediesModel.find({ Dosha: "v" }, { Hypothyroidism: false });
+    pitta = await RemediesModel.find({ Dosha: "p" }, { Hypothyroidism: false });
+  }
+  else if (P) {
+    kapha = await RemediesModel.find({ Dosha: "k" }, { PCOD: false });
+    vata = await RemediesModel.find({ Dosha: "v" }, { PCOD: false });
+    pitta = await RemediesModel.find({ Dosha: "p" }, { PCOD: false });
+  }
+  else if (N) {
+    kapha = await RemediesModel.find({ Dosha: "k" });
+    vata = await RemediesModel.find({ Dosha: "v" });
+    pitta = await RemediesModel.find({ Dosha: "p" });
+  }
+  else {
+    kapha = await RemediesModel.find({ Dosha: "k" });
+    vata = await RemediesModel.find({ Dosha: "v" });
+    pitta = await RemediesModel.find({ Dosha: "p" });
+  }
+
+
   var result = {};
   var types = {};
 
-  const values = { "f" : 10, "v" : 10, "g" : 10, "n" : 5, "o" : 4, "s" : 10};
+  const values = { "f": 10, "v": 10, "g": 10, "n": 5, "o": 4, "s": 10 };
 
 
   // for(key in values)
@@ -312,67 +294,58 @@ app.post("/remedy", async (req,res) => {
   // fruit = pitta.filter(obj => obj.Type == 'f')
   // veg = pitta.filter(obj => obj.Type == 'v')
 
-  
-var tp;
 
-// FOR PITTA DOSHA
+  var tp;
 
-for(key in values)
-  {
-      types[key] = pitta.filter(obj => obj.Type == key)
+  // FOR PITTA DOSHA
+
+  for (key in values) {
+    types[key] = pitta.filter(obj => obj.Type == key)
   }
 
-for(let i = 1; i <= Pr; i++)
-{
-    for(key in values)
-    {
-        max = values[key];
-        let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        tp = types[key];
-        result[tp[count].RemedyName] = tp[count].Description;
+  for (let i = 1; i <= Pr; i++) {
+    for (key in values) {
+      max = values[key];
+      let count = Math.floor(Math.random() * (max - min + 1)) + min;
+      tp = types[key];
+      result[tp[count].RemedyName] = tp[count].Description;
     }
-}
+  }
 
 
 
-// FOR KAPHA DOSHA
+  // FOR KAPHA DOSHA
 
-for(key in values)
-{
+  for (key in values) {
     types[key] = kapha.filter(obj => obj.Type == key)
-}
+  }
 
-for(let i = 1; i <= Kr; i++)
-{
-    for(key in values)
-    {
-        max = values[key];
-        let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        tp = types[key];
-        result[tp[count].RemedyName] = tp[count].Description;
+  for (let i = 1; i <= Kr; i++) {
+    for (key in values) {
+      max = values[key];
+      let count = Math.floor(Math.random() * (max - min + 1)) + min;
+      tp = types[key];
+      result[tp[count].RemedyName] = tp[count].Description;
     }
-}
- 
+  }
 
-// FOR VATA DOSHA
 
-for(key in values)
-{
+  // FOR VATA DOSHA
+
+  for (key in values) {
     types[key] = vata.filter(obj => obj.Type == key)
-}
+  }
 
-for(let i = 1; i <= Vr; i++)
-{
-    for(key in values)
-    {
-        max = values[key];
-        let count = Math.floor(Math.random() * (max - min + 1)) + min;
-        tp = types[key];
-        result[tp[count].RemedyName] = tp[count].Description;
+  for (let i = 1; i <= Vr; i++) {
+    for (key in values) {
+      max = values[key];
+      let count = Math.floor(Math.random() * (max - min + 1)) + min;
+      tp = types[key];
+      result[tp[count].RemedyName] = tp[count].Description;
     }
-}
+  }
 
-res.send(kapha);
+  res.send(result);
 
 })
 
@@ -429,7 +402,7 @@ app.post("/addReminder", async (req, res) => {
   })
 
   reminder.save();
-  ReminderModel.find({member_id}).then((reminderList) => {
+  ReminderModel.find({ member_id }).then((reminderList) => {
     if (reminderList) {
       res.send(reminderList);
     }
@@ -437,9 +410,9 @@ app.post("/addReminder", async (req, res) => {
 })
 
 app.post("/deleteReminder", (req, res) => {
-  const {reminder_id, member_id} = req.body
+  const { reminder_id, member_id } = req.body
   ReminderModel.deleteOne({ _id: reminder_id }).then(() => {
-    ReminderModel.find({member_id}).then((reminderList) => {
+    ReminderModel.find({ member_id }).then((reminderList) => {
       if (reminderList) {
         res.send(reminderList)
       }
@@ -460,7 +433,7 @@ app.post("/UserFeedbacks", async (req, res) => {
   const member_name = user_details.name;
   const feedbacks = new FeedbacksModel({
     member_id,
-  member_name,
+    member_name,
     feedbackMsg,
   });
 
