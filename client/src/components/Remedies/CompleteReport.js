@@ -41,10 +41,15 @@ function CompleteReport() {
 
     useEffect(() => {
         try {
-
+            axios.post('http://localhost:5000/avoids', { member_id}).then((data) => 
+            {
+                console.log(data.data);
+            }).catch(err => {
+                console.log(err);
+            })
         }
-        catch {
-
+        catch (error) {
+            console.error(error);
         }
     }, []);
 

@@ -451,13 +451,13 @@ app.post("/DoctorFeedbacks", async (req, res) => {
 
 app.listen(5000, () => console.log("Backend is running"));
 
-app.get("/avoids",async (req,res) => 
+app.post("/avoids",async (req,res) => 
 {
-    // const {member_id} = req.body;
-    // const doshas = await DoshaReportModel.find({member_id:member_id});
-    // const pScore = doshas.pitta, kScore = doshas.kapha, vScore = doshas.vatta;
+    const {member_id} = req.body;
+    const doshas = await DoshaReportModel.find({member_id:member_id});
+    const pScore = doshas.pitta, kScore = doshas.kapha, vScore = doshas.vatta;
 
-    const pScore = 6, kScore = 3, vScore = 6;
+    // const pScore = 6, kScore = 3, vScore = 6;
     const avoid = await AvoidsModel.find();
     var final = [];
     const p = 0, k = 1,v = 2;
