@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import Navbar from '../Dashboard/NavBar';
 import Sidebar from '../Dashboard/SideBar';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Remedies.css';
 
 const Remedies = () => {
@@ -57,19 +57,26 @@ const Remedies = () => {
         showRemedy(true);
     }
 
+    const navigate = useNavigate();
     return (
         <div>
             <div style={{ Height: '500px', overflowY: 'auto' }}>
 
                 <Modal
-                    size='md'
+                    size='lg'
                     isOpen={remedyModal}
                     toggle={() => { handleModalToggle() }}
                 >
 
                     <ModalHeader>
                         Remedies
-                        <button className='btn btn-success pull-right' style={{ marginLeft: '190px' }}
+                        <button className='btn btn-success ' style={{ marginLeft: '350px' }}
+                            onClick={() => {
+                                navigate('/reminder', { state: { id: member_id, name: id.state.name } });
+                            }}>
+                            Set Reminders
+                        </button>
+                        <button className='btn btn-success ' style={{ marginLeft: '10px' }}
                             onClick={() => {
                                 let newWin = window.open('/completeRemedies', '_blank');
                                 newWin.member_id = member_id;
@@ -100,11 +107,11 @@ const Remedies = () => {
 
             <Navbar />
             <div class="container-fluid" id="main" style={{ alignContent: 'center' }}>
-                <br />
                 <div class="row row-offcanvas row-offcanvas-left">
                     <Sidebar member_id={id.state.id} member_name={id.state.name} />
 
                     <div className="col main pt-5 mt-3">
+                        <br />
                         <div className="row mb-3 justify-content-center">
                             <div className="col-xl-3 col-sm-6 py-2">
                                 <div className="card bg-success text-white h-100">
