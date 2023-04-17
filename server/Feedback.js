@@ -6,6 +6,9 @@ const FeedbackSchema = new Schema({
         type: String,
         length: 100
     },
+    member_name: {
+        type: String,
+    },
     feedbackMsg: {
         type: String,
     },

@@ -44,7 +44,6 @@ app.post("/users", async (req, res) => {
           res.status(403).send({ message: "User already registered" })
         }
         else {
-          let counter = 1;
           encryptedPasscode = sha256(password);
           const user = new UserModel({
             name,
@@ -53,7 +52,6 @@ app.post("/users", async (req, res) => {
             email,
             phone,
             encryptedPasscode,
-            counter,
           });
 
           user.save();
@@ -185,13 +183,18 @@ app.post("/Remedies", async (req, res) => {
 
 app.get("/remedy", async (req,res) => {
   
-  // const{kScore, pScore, vScore, medicalCondition } = req.body;
+  // const{member_id, medicalCondition } = req.body;
 
   const kScore = 6;
   const pScore = 7;
   const vScore = 3;
+
+  const member_id = "64392a439f9680cd7048c4f2";
+  const doshas = await DoshaReportModel.find({member_id:member_id});
   
-  let Kr, Pr, Vr;
+  let Kr = doshas.kapha, Pr = doshas.pitta, Vr = doshas.vatta;
+
+
   var fruit, veg, grain, oil, spices, nuts, max;
 
 
@@ -255,11 +258,42 @@ app.get("/remedy", async (req,res) => {
     Vr = 4;
   }
   
-
-
-  const kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
-  const vata = await RemediesModel.find({Dosha : "v"}, {Hyperthyroidism : false}, {Hypothyroidism : false});
-  const pitta = await RemediesModel.find({Dosha : "p"}, {PCOD: false});
+  let pitta = {},vata = {},kapha = {};
+  const E = true;
+  const H = false;
+  const R = false;
+  const P = false;
+  console.log(E);
+  if(E)
+  {
+  kapha = await RemediesModel.find({ Dosha : "k" }, {Eczema : false});
+  vata = await RemediesModel.find({Dosha : "v"},    {Eczema: false});
+  pitta = await RemediesModel.find({Dosha : "p"},   {Eczema: false});
+  }
+  else if(R)
+  {
+    kapha = await RemediesModel.find({ Dosha : "k" }, {Hyperthyroidism : false});
+    vata = await RemediesModel.find({Dosha : "v"},    {Hyperthyroidism: false});
+    pitta = await RemediesModel.find({Dosha : "p"},   {Hyperthyroidism: false});
+  }
+  else if(H)
+  {
+    kapha = await RemediesModel.find({ Dosha : "k" }, {Hypothyroidism : false});
+    vata = await RemediesModel.find({Dosha : "v"}, {Hypothyroidism : false});
+    pitta = await RemediesModel.find({Dosha : "p"}, {Hypothyroidism : false});
+  }
+  else if(P)
+  {
+    kapha = await RemediesModel.find({ Dosha : "k" }, {PCOD : false});
+    vata = await RemediesModel.find({Dosha : "v"}, {PCOD : false});
+    pitta = await RemediesModel.find({Dosha : "p"}, {PCOD : false});
+  }
+  else
+  {
+    kapha = await RemediesModel.find({ Dosha : "k" });
+    vata = await RemediesModel.find({Dosha : "v"});
+    pitta = await RemediesModel.find({Dosha : "p"});
+  }
   
 
   var count;
@@ -320,8 +354,6 @@ for(let i = 1; i <= Kr; i++)
 }
  
 
-
-
 // FOR VATA DOSHA
 
 for(key in values)
@@ -340,7 +372,7 @@ for(let i = 1; i <= Vr; i++)
     }
 }
 
-  res.send(result);
+res.send(kapha);
 
 })
 
@@ -424,8 +456,11 @@ app.post("/deleteReminder", (req, res) => {
 app.post("/UserFeedbacks", async (req, res) => {
 
   const { member_id, feedbackMsg } = req.body;
+  const user_details = await UserModel.find({ member_id: member_id })
+  const member_name = user_details.name;
   const feedbacks = new FeedbacksModel({
     member_id,
+  member_name,
     feedbackMsg,
   });
 
@@ -434,6 +469,7 @@ app.post("/UserFeedbacks", async (req, res) => {
 })
 
 // Feedbacks displayed on the doctor panel side
+
 app.post("/DoctorFeedbacks", async (req, res) => {
   const feedbacks = await FeedbacksModel.find()
   res.status(200).send(feedbacks);
