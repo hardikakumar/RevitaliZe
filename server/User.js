@@ -28,10 +28,6 @@ const UserSchema = new Schema({
         type: String,
         length: 14
     },
-    counter: {
-        type: String,
-        length: 10
-    },
     password: {
         type: String,
         length: 20
