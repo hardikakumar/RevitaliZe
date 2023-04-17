@@ -9,6 +9,17 @@ import './DoctorDashboard.css'
 const DoctorDashboard = () => {
     let id = useLocation();
 
+    try {
+        axios.post('http://localhost:5000/DoctorFeedbacks').then((data) => 
+        {
+            console.log(data.data)
+        })
+    }
+    catch (error) 
+    {
+       console.error(error)
+    }
+
     return (
         <div>
             <Navbar />

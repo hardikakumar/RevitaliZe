@@ -3,7 +3,7 @@ import { FaLeaf } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     return (
         <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
