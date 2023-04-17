@@ -183,7 +183,7 @@ app.post("/Remedies", async (req, res) => {
 
 // TO FETCH REMEDIES TO DISPLAY THE REQUIRED REMEDIES FOR THE USER
 
-app.get("/remedy", async (req,res) => {
+app.post("/remedy", async (req,res) => {
   
   // const{kScore, pScore, vScore, medicalCondition } = req.body;
 

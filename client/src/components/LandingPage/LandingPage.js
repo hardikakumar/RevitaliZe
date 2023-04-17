@@ -6,6 +6,7 @@ import logo from '../../assets/images/logo.png';
 import dietPlanImg from '../../assets/images/dietPlan.jpg';
 import nutritionist from '../../assets/images/nutritionist.jpg';
 import reminders from '../../assets/images/reminder.png';
+import { BiLeaf } from "react-icons/bi";
 import SignUpForm from './SignUpForm.js'
 import LoginForm from './LoginForm.js'
 
@@ -15,12 +16,6 @@ function LandingPage() {
 
   return (
     <div>
-      {/* Header */}
-      <header>
-        <div>
-          <img style={{ height: 60, left: 20 }} src={logo} alt="Logo" />
-        </div>
-      </header>
 
       {/* SignUp Form */}
       <div>
@@ -58,25 +53,19 @@ function LandingPage() {
 
       <div>
         {/* Navigation menu */}
-        <nav>
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+        <nav className="landingPageNav">
+          <ul style={{marginLeft: '-10px'}}>
+            <a title="Free Bootstrap 4 Admin Template" style={{ fontSize: '24px', marginLeft: '-10px' }}>RevitaliZe <BiLeaf style={{ marginTop: '-7px', color: 'white' }} /></a>
           </ul>
           <ul>
-            <li><button className='btn btn-warning' onClick={() => showSignUp(true)}>Sign Up</button></li>
-            <li><button className='btn btn-warning' onClick={() => showLogin(true)}>Login</button></li>
+            <li><button className='btn btn-outline-light' onClick={() => showSignUp(true)}>Sign Up</button></li>
+            <li><button className='btn btn-outline-light' onClick={() => showLogin(true)}>Login</button></li>
           </ul>
         </nav>
       </div>
 
       {/* Hero section */}
-      <section className="hero">
-        {/* <h2>Eat healthy, stay healthy</h2>
-        <p>Get personalized diet plans and achieve your fitness goals</p> */}
-      </section>
+      <section className="hero" />
 
       {/* Features section */}
       <section className="features">

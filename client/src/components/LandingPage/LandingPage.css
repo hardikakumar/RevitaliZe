@@ -38,6 +38,10 @@ nav {
   padding-top: 10px;
 }
 
+.landingPageNav {
+  background-image: url('../../assets/images/darkGreen.jpg');
+}
+
 nav ul {
   list-style: none;
   margin: 0;
