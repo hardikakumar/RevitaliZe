@@ -28,9 +28,9 @@ const Remedies = () => {
             axios.post('http://localhost:5000/remedy', { member_id, E, P, R, H, N }).then((data) => {
                 remedies.current = data.data;
                 remedyName.current = [...Object.keys(data.data)];
-                console.log(remedyName.current[0])
-                let x = remedyName.current[0];
-                console.log(remedies.current[x])
+                // console.log(remedyName.current[0])
+                // let x = remedyName.current[0];
+                // console.log(remedies.current[x])
             }).catch(err => {
                 console.log(err);
             })

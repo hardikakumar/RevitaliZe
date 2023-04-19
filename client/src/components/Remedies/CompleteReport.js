@@ -99,24 +99,11 @@ function CompleteReport() {
                                     <View style={styles.rowView}>
                                         <Text style={{ color: 'black', fontSize: '14' }}>{rem}</Text>
                                         <br />
-                                        {/* </View>
-                                <View style={styles.rowView}> */}
                                         <Text>{remedies[rem]}</Text>
                                     </View>
                                 </View>
                             ))}
                         </View>
-
-                        {/* {record.map((rowData) => <>
-                            <View style={styles.rowView}>
-                                <Text style={{ width: `${100 / 4}%` }}>{rowData.date.split(' ')[0]}, {rowData.date.split(' ').slice(1, 4).join(' ')}</Text>
-                                <Text style={{ width: `${100 / 4}%` }}>{rowData.vatta}</Text>
-                                <Text style={{ width: `${100 / 4}%` }}>{rowData.pitta}</Text>
-                                <Text style={{ width: `${100 / 4}%` }}>{rowData.kapha}</Text>
-                            </View>
-                        </>)} */}
-
-
                     </Page>
                 </Document>
             </PDFViewer>

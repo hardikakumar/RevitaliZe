@@ -6,8 +6,7 @@ const cors = require("cors");
 var sha256 = require("js-sha256");          // For Encryption
 const mongoose = require("mongoose");      // For Database
 
-const DB =
-  "mongodb+srv://singh:singh@cluster0.qiskiyr.mongodb.net/revitalize?retryWrites=true&w=majority";
+const DB = process.env.MONGO_DB_ID;
 
 const UserModel = require("./User.js");
 const QuesModel = require("./Ques.js");
@@ -369,8 +368,7 @@ setInterval(() => {
               .create({
                 body: "A reminder from RevitaliZe: *" + reminder.reminderMsg + "*",
                 from: 'whatsapp:+14155238886',
-                to: 'whatsapp:+919829081906'
-                // to: 'whatsapp:+918949291337'
+                to: 'whatsapp:+91##########'
               }).then(message => console.log(message.sid));
           }).catch((err) => {
             console.log(err);
